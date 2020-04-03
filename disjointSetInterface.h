@@ -10,12 +10,13 @@
 #include <iostream>
 using namespace std;
 
+template <typename T>
 class disjointSetInterface {
 public:
     disjointSetInterface() {}
-    virtual void makeSet() = 0;
+    virtual void makeSet(T) = 0;
     virtual void unionSets() = 0;
-    //virtual auto* find() = 0;
+    virtual T* find() = 0;
     virtual void printType() = 0;
 };
 

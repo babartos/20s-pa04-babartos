@@ -86,8 +86,11 @@ void readControlFile(char* controlFileName) {
 ////control file is data01.txt (contains a GML)
 int main(int argc, char* argv[]) {
     readControlFile(argv[1]); //command line arg executes program
-    disjointSetInterface* name = new linkedListDisjointSet;
+    disjointSetInterface<string>* name = new linkedListDisjointSet<string>;
     name->printType();
+    name->find();
+    string q = "hee";
+    name->makeSet(q);
 
     cout << "helloworld";
     return 0;
