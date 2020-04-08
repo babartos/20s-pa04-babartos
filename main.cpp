@@ -47,6 +47,9 @@ void readGraphInputFile(graph<string>& theMap, string fileName) { //reads in a d
 void readControlFile(char* controlFileName) {
     graph<string> theMap; //a graph to be used
     ifstream iFile(controlFileName); //CONTROL FILE NAME (data01.txt)
+    if(!iFile.is_open()) {
+        cout << "could not open file: " << controlFileName << endl;
+    }
     while(!iFile.eof()) {
         string instruction;
         iFile >> instruction;
@@ -86,12 +89,15 @@ void readControlFile(char* controlFileName) {
 ////control file is data01.txt (contains a GML)
 int main(int argc, char* argv[]) {
     readControlFile(argv[1]); //command line arg executes program
-    disjointSetInterface<string>* name = new linkedListDisjointSet<string>;
-    name->printType();
-    name->find();
-    string q = "hee";
-    name->makeSet(q);
-
+    disjointSetInterface<int>* name = new linkedListDisjointSet<int>;
+    name->makeSet(10);
+    name->makeSet(15);
+    name->makeSet(20);
+    name->makeSet(25);
+    name->unionSets(15, 25);
+    name->printSet();
+    name->unionSets(15,20);
+    name->printSet();
     cout << "helloworld";
     return 0;
 }

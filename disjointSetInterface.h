@@ -15,9 +15,9 @@ class disjointSetInterface {
 public:
     disjointSetInterface() {}
     virtual void makeSet(T) = 0;
-    virtual void unionSets() = 0;
-    virtual T* find() = 0;
-    virtual void printType() = 0;
+    virtual void unionSets(T,T) = 0;
+    virtual list<T>* find(T) = 0;
+    virtual void printSet() = 0;
 };
 
 
