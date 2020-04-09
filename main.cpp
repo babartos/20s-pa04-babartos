@@ -6,6 +6,7 @@
 #include "graph.h"
 #include "disjointSetInterface.h"
 #include "linkedListDisjointSet.h"
+#include "weightedGraph.h"
 using namespace std;
 
 ////READS INPUT FILE (FILE OF DATA AND INPUT TO A GRAPH)
@@ -69,7 +70,6 @@ void readControlFile(char* controlFileName) {
         else if(instruction == "find") { ////finds the given node in the graph and returns a ref
             string nodeToFind;
             iFile >> nodeToFind;
-
         }
         else if(instruction == "union") { ////finds each disjoint set the element is in then combines both sets
             string arg1, arg2;
@@ -98,6 +98,9 @@ int main(int argc, char* argv[]) {
     name->printSet();
     name->unionSets(15,20);
     name->printSet();
+
+    WeightedGraph<int> hello;
+    hello.addVertex(5);
     cout << "helloworld";
     return 0;
 }
