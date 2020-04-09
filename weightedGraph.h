@@ -22,7 +22,7 @@ public:
     Vertex(T value) {
         vertex = value;
     }
-    Vertex() {vertex = NULL;}
+    Vertex() {;}
 };
 
 template <typename T>
@@ -80,7 +80,7 @@ void WeightedGraph<T>::addEdge(Vertex<T> v1, Vertex<T> v2, unsigned int weight) 
     Edge<T> insertEdge2 = Edge(v2, v1, weight);
     for(int i = 0; i < myGraph.size(); i++) {
         if(myGraph[i].first.getVertex() == v1.getVertex()) { //makes sure vertecies are equal
-            myGraph[i].second.push_back(insertEdge); //push back the edge
+            myGraph[i].second.push_back(insertEdge); //push back the
         }
         if(myGraph[i].first.getVertex() == v2.getVertex()) {
             myGraph[i].second.push_back(insertEdge2);
