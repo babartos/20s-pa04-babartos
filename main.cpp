@@ -10,9 +10,8 @@
 using namespace std;
 
 ////READS INPUT FILE (FILE OF DATA AND INPUT TO A GRAPH)
-void readGraphInputFile(graph<string>& theMap, string fileName) { //reads in a directed file
+void readWeightedGraphInputFile(WeightedGraph<string>& theMap, string fileName) { //reads in a directed file
     const char *here = fileName.c_str();
-    theMap.setInFile(here);
     ifstream inFile(here); //opens g1.txt
     if(!inFile.is_open()) {
         cout << "could not find input file" << endl;
@@ -35,10 +34,12 @@ void readGraphInputFile(graph<string>& theMap, string fileName) { //reads in a d
         string vertex1;
         string dash;
         string vertex2;
+        unsigned int weight;
         inFile >> vertex1;
         inFile >> dash;
         inFile >> vertex2;
-        theMap.addEdge(vertex1, vertex2); //add edge to an undirected graph
+        inFile >> weight;
+        theMap.addEdge(vertex1, vertex2, weight); //add edge to a weighted graph
     }
     ////TEMPORARY
     inFile.close();
@@ -46,7 +47,7 @@ void readGraphInputFile(graph<string>& theMap, string fileName) { //reads in a d
 
 /////READS A CONTROL FILE AND EXECUTES BASED UPON INSTRUCTIONS
 void readControlFile(char* controlFileName) {
-    graph<string> theMap; //a graph to be used
+    WeightedGraph<string> theMap; //a graph to be used
     ifstream iFile(controlFileName); //CONTROL FILE NAME (data01.txt)
     if(!iFile.is_open()) {
         cout << "could not open file: " << controlFileName << endl;
@@ -57,10 +58,17 @@ void readControlFile(char* controlFileName) {
         string fileName;
         if(instruction == "readGraph") { ////reads a graph input file (from pa02)
             iFile >> fileName;
-            readGraphInputFile(theMap, fileName); //reads g1.txt
+            readWeightedGraphInputFile(theMap, fileName); //reads g1.txt
         }
         else if(instruction == "ow") { ////intilizes output file
             iFile >> fileName;
+            ofstream outFile;
+            outFile.open(fileName);
+            if(!outFile.is_open()) { //output file is not open
+                cout << "please specify an output file first" << endl;
+                return;
+            }
+            outFile << "hello";
         }
         else if(instruction == "makeSet") { ////makes a new disjoint set with the given node
             string newSetNode;
@@ -88,7 +96,7 @@ void readControlFile(char* controlFileName) {
 ////DRIVER, argv[1] = filename;
 ////control file is data01.txt (contains a GML)
 int main(int argc, char* argv[]) {
-    readControlFile(argv[1]); //command line arg executes program
+    readControlFile(argv[1]); //command line arg executes program using a "GML"
     disjointSetInterface<int>* name = new linkedListDisjointSet<int>;
     name->makeSet(10);
     name->makeSet(15);
@@ -101,6 +109,10 @@ int main(int argc, char* argv[]) {
 
     WeightedGraph<int> hello;
     hello.addVertex(5);
+    hello.addVertex(6);
+    hello.addEdge(5,6,1);
+
+    int y = 4;
     cout << "helloworld";
     return 0;
 }
