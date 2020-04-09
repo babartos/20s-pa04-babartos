@@ -47,6 +47,7 @@ void readWeightedGraphInputFile(WeightedGraph<string>& theMap, string fileName) 
 
 /////READS A CONTROL FILE AND EXECUTES BASED UPON INSTRUCTIONS
 void readControlFile(char* controlFileName) {
+    ofstream outFile;
     WeightedGraph<string> theMap; //a graph to be used
     ifstream iFile(controlFileName); //CONTROL FILE NAME (data01.txt)
     if(!iFile.is_open()) {
@@ -62,7 +63,6 @@ void readControlFile(char* controlFileName) {
         }
         else if(instruction == "ow") { ////intilizes output file
             iFile >> fileName;
-            ofstream outFile;
             outFile.open(fileName);
             if(!outFile.is_open()) { //output file is not open
                 cout << "please specify an output file first" << endl;
@@ -90,6 +90,7 @@ void readControlFile(char* controlFileName) {
 
     }
     iFile.close();
+    outFile.close();
 }
 
 
