@@ -100,7 +100,7 @@ void readControlFile(char* controlFileName) {
 ////DRIVER, argv[1] = filename;
 ////control file is data01.txt (contains a GML)
 int main(int argc, char* argv[]) {
-    readControlFile(argv[1]); //command line arg executes program using a "GML"
+    //readControlFile(argv[1]); //command line arg executes program using a "GML"
     disjointSetInterface<int>* name = new linkedListDisjointSet<int>;
     name->makeSet(10);
     name->makeSet(15);
@@ -110,12 +110,14 @@ int main(int argc, char* argv[]) {
     name->printSet();
     name->unionSets(15,20);
     name->printSet();
-
     WeightedGraph<int> hello;
     hello.addVertex(5);
     hello.addVertex(6);
     hello.addEdge(5,6,1);
-
+    ofstream oFile;
+    oFile.open(argv[2]);
+    oFile << "helloworld";
+    oFile.close();
     int y = 4;
     cout << "helloworld";
     return 0;
