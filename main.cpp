@@ -71,7 +71,7 @@ void readControlFile(char* controlFileName) {
                 return;
             }
             outFile << "hello";
-            cout << "output file sucess opened";
+            cout << "output file sucessfully opened" << fileName << endl;
         }
         else if(instruction == "makeSet") { ////makes a new disjoint set with the given node
             string newSetNode;
@@ -100,7 +100,7 @@ void readControlFile(char* controlFileName) {
 ////DRIVER, argv[1] = filename;
 ////control file is data01.txt (contains a GML)
 int main(int argc, char* argv[]) {
-    //readControlFile(argv[1]); //command line arg executes program using a "GML"
+    readControlFile(argv[1]); //command line arg executes program using a "GML"
     disjointSetInterface<int>* name = new linkedListDisjointSet<int>;
     name->makeSet(10);
     name->makeSet(15);
@@ -114,10 +114,10 @@ int main(int argc, char* argv[]) {
     hello.addVertex(5);
     hello.addVertex(6);
     hello.addEdge(5,6,1);
-    ofstream oFile;
-    oFile.open(argv[2]);
-    oFile << "helloworld";
-    oFile.close();
+//    ofstream oFile;
+//    oFile.open(argv[2]);
+//    oFile << "helloworld";
+//    oFile.close();
     int y = 4;
     cout << "helloworld";
     return 0;
