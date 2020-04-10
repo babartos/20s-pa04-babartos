@@ -15,6 +15,7 @@ void readWeightedGraphInputFile(WeightedGraph<string>& theMap, string fileName) 
     ifstream inFile(here); //opens g1.txt
     if(!inFile.is_open()) {
         cout << "could not find input file" << endl;
+        return;
     }
     int lineNum;
     inFile.ignore();// ignore [
@@ -51,7 +52,8 @@ void readControlFile(char* controlFileName) {
     WeightedGraph<string> theMap; //a graph to be used
     ifstream iFile(controlFileName); //CONTROL FILE NAME (data01.txt)
     if(!iFile.is_open()) {
-        cout << "could not open file: " << controlFileName << endl;
+        cout << "could not open control file: " << controlFileName << endl;
+        return;
     }
     while(!iFile.eof()) {
         string instruction;
@@ -69,6 +71,7 @@ void readControlFile(char* controlFileName) {
                 return;
             }
             outFile << "hello";
+            cout << "output file sucess opened";
         }
         else if(instruction == "makeSet") { ////makes a new disjoint set with the given node
             string newSetNode;
