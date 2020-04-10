@@ -12,7 +12,6 @@ set (EXE_NAME SampleProject)
 # etc....
 
 set (input01 "data01.txt")
-set (input02 "g1.txt")
 
 #
 ##########################################
