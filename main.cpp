@@ -93,7 +93,7 @@ void readControlFile(char* controlFileName) {
             WeightedGraph<string> theMap; //a graph to be used
             readWeightedGraphInputFile(theMap, fileName);
             //execute Kruskal Algo
-            kruskal kruskalAccessor;
+            kruskal kruskalAccessor = kruskal();
             vector<Edge<string>> minSpanTree = kruskalAccessor.kruskalsAlgothrim(theMap);
             //output to file
             outFile << "Min Spanning Tree for File \"" << fileName << "\":" << endl;

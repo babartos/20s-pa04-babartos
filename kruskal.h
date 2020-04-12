@@ -48,9 +48,11 @@ vector<Edge<string>> kruskal::kruskalsAlgothrim(WeightedGraph<string> theGraph) 
         //MIGHT NEED TO CHANGE
         Vertex<string> first = currEdge.getfirstVertex();
         string hello = first.getVertex();
-        //find set of the first and second vertecies
-        list<Vertex<string>>* tempset1 = vertexList->find(currEdge.getfirstVertex().getVertex());
-        list<Vertex<string>>* tempset2 = vertexList->find(currEdge.getsecondVertex().getVertex());
+        //find set of the first and second vertex in the list
+//        list<Vertex<string>>* tempset1 = vertexList->find(currEdge.getfirstVertex().getVertex());
+//        list<Vertex<string>>* tempset2 = vertexList->find(currEdge.getsecondVertex().getVertex());
+        auto* tempset1 = vertexList->find(currEdge.getfirstVertex().getVertex());
+        auto* tempset2 = vertexList->find(currEdge.getsecondVertex().getVertex());
         if(!(*tempset1 == *tempset2)) { // if FindSet(u) != FindSet(v)
             //add to MST
             //a) union(u,v)
