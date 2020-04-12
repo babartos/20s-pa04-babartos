@@ -13,6 +13,7 @@ set (EXE_NAME SampleProject)
 
 set (input01 "data01.txt")
 set (input02 "g1.txt")
+set (input03 "g2.txt")
 #
 ##########################################
 

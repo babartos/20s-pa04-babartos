@@ -41,7 +41,7 @@ void linkedListDisjointSet<T>::unionSets(T element1, T element2) {
         ref1 = find(element1);
     }
     list<T>* ref2 = find(element2);
-    if (ref2 == nullptr) {
+    if (ref2 == nullptr) { //if not an exisiting set, make it and then find a ref to it
         makeSet(element2);
         ref2 = find(element2);
     }
@@ -64,12 +64,31 @@ void linkedListDisjointSet<T>::unionSets(T element1, T element2) {
         std::advance(it2, 1); //advance iterator
     }
     //linear search for each linked list and delete
-    int iterations = theSet.size();
-    for (int i = 0; i < iterations; i++) {
-        if(theSet[i] == *ref1 || theSet[i] == *ref2) {
-            theSet.erase(theSet.begin() + i);
+    int eraseIndex1 = 0;
+    int eraseIndex2 = 0;
+    for (int i = 0; i < theSet.size(); i++) { //delete first list
+        if(theSet[i] == *ref1) {
+            //theSet.erase(theSet.begin() + i);
+            eraseIndex1 = i;
+            break;
         }
     }
+    for (int i = 0; i < theSet.size(); i++) { //delete second list
+        list<T> curr1 = theSet[i];
+        list<T> curr2 = *ref2;
+        if(theSet[i] == *ref2) {
+            //theSet.erase(theSet.begin() + i);
+            eraseIndex2 = i;
+            break;
+        }
+    }
+    if(eraseIndex2 < eraseIndex1) {
+        int temp = eraseIndex1;
+        eraseIndex1 = eraseIndex2;
+        eraseIndex2 = temp;
+    }
+    theSet.erase(theSet.begin() + eraseIndex1);
+    theSet.erase(theSet.begin() + (eraseIndex2 - 1));
     theSet.push_back(toInsert);
 }
 

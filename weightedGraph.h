@@ -52,6 +52,11 @@ public:
         }
         return false;
     }
+    bool operator<(const Edge<T>& passed) const {
+        if(this->getWeight() > passed.getWeight()) { return false; }
+        else { return true; }
+
+    }
 };
 
 

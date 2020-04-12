@@ -1,2 +1,3 @@
 ow output01.txt
 MST g1.txt
+MST g2.txt

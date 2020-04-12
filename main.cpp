@@ -50,20 +50,19 @@ void readWeightedGraphInputFile(WeightedGraph<string>& theMap, string fileName) 
 /////READS A CONTROL FILE AND EXECUTES BASED UPON INSTRUCTIONS
 void readControlFile(char* controlFileName) {
     ofstream outFile;
-    WeightedGraph<string> theMap; //a graph to be used
     ifstream iFile(controlFileName); //CONTROL FILE NAME (data01.txt)
     if(!iFile.is_open()) {
         cout << "could not open control file: " << controlFileName << endl;
         return;
     }
     while(!iFile.eof()) {
+        WeightedGraph<string> globalMap;
         string instruction;
         iFile >> instruction;
         string fileName;
         if(instruction == "readGraph") { ////reads a graph input file (from pa02)
             iFile >> fileName;
-            readWeightedGraphInputFile(theMap, fileName); //reads g1.txt
-            int x = 5;
+            readWeightedGraphInputFile(globalMap, fileName); //reads g1.txt
         }
         else if(instruction == "ow") { ////intilizes output file
             iFile >> fileName;
@@ -90,9 +89,19 @@ void readControlFile(char* controlFileName) {
         else if(instruction == "MST") { ////output min spanning tree for a graph text file specified using Kruskal'
             string fileName;
             iFile >> fileName;
+            //intilize weighted graph:
+            WeightedGraph<string> theMap; //a graph to be used
             readWeightedGraphInputFile(theMap, fileName);
+            //execute Kruskal Algo
             kruskal kruskalAccessor;
-            kruskalAccessor.kruskalsAlgothrim(theMap);
+            vector<Edge<string>> minSpanTree = kruskalAccessor.kruskalsAlgothrim(theMap);
+            //output to file
+            outFile << "Min Spanning Tree for File \"" << fileName << "\":" << endl;
+            for(int i = 0; i < minSpanTree.size(); i++) {
+                outFile << " " << minSpanTree[i].getfirstVertex().getVertex() << " - " << minSpanTree[i].getsecondVertex().getVertex();
+                outFile << "\tweight: " << minSpanTree[i].getWeight();
+                outFile << endl;
+            }
 
         }
 
@@ -101,37 +110,9 @@ void readControlFile(char* controlFileName) {
     outFile.close();
 }
 
-
-////DRIVER, argv[1] = filename;
-////control file is data01.txt (contains a GML)
+////control file is data01.txt (contains a GML; defined by instructions)
 int main(int argc, char* argv[]) {
     readControlFile("data01.txt"); //command line arg executes program using a "GML"
-    Edge<int> first;
-    Edge<int> second;
-//    disjointSetInterface<int>* name = new linkedListDisjointSet<int>;
-//    name->makeSet(10);
-//    name->makeSet(15);
-//    name->makeSet(20);
-//    name->makeSet(25);
-//    name->unionSets(15, 25);
-//    name->printSet();
-//    name->unionSets(15,20);
-//    name->printSet();
-//    WeightedGraph<int> hello;
-//    hello.addVertex(4);
-//    hello.addVertex(5);
-//    hello.addVertex(6);
-//    hello.addEdge(5,6,1);
-//    hello.addEdge(4, 6, 3);
-//    vector<Edge<int>> hereweGO = hello.getListOfEdges();
-//    vector<Vertex<int>> hahaha = hello.getListOfVertecies();
-
-
-//    ofstream oFile;
-//    oFile.open(argv[2]);
-//    oFile << "helloworld";
-//    oFile.close();
-    int y = 4;
     cout << "helloworld";
     return 0;
 }
