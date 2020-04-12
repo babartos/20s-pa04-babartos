@@ -91,7 +91,9 @@ void readControlFile(char* controlFileName) {
             string fileName;
             iFile >> fileName;
             readWeightedGraphInputFile(theMap, fileName);
-            kruskal<int> kruskalAccessor;
+            kruskal kruskalAccessor;
+            kruskalAccessor.kruskalsAlgothrim(theMap);
+
         }
 
     }

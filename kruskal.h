@@ -9,22 +9,28 @@
 #include "linkedListDisjointSet.h"
 #include "weightedGraph.h"
 #include <iostream>
+#include <string>
 
-template <typename T>
 class kruskal {
 private:
-    disjointSetInterface<Vertex<T>>* vertexList; //used for comparsion
-    disjointSetInterface<Edge<T>>* MinSpanningTree; //contents of minumum spanning tree
+    disjointSetInterface<Vertex<string>>* vertexList; //used for comparsion
+    disjointSetInterface<Edge<string>>* MinSpanningTree; //contents of minumum spanning tree
 public:
     kruskal();
-    vector<Edge<T>> kruskalsAlgothrim(WeightedGraph<T>);
+    //vector<Edge<string>> kruskalsAlgothrim(WeightedGraph<string>);
+    void kruskalsAlgothrim(WeightedGraph<string>);
+
 };
 
-template <typename T>
-kruskal<T>::kruskal() {
-    vertexList = new linkedListDisjointSet<Vertex<T>>;
-    MinSpanningTree = new linkedListDisjointSet<Edge<T>>;
+kruskal::kruskal() {
+    vertexList = new linkedListDisjointSet<Vertex<string>>;
+    MinSpanningTree = new linkedListDisjointSet<Edge<string>>;
 }
 
+void kruskal::kruskalsAlgothrim(WeightedGraph<string> theGraph) {
+    //to implement
+    cout << "here" << endl;
+
+}
 
 #endif //INC_20S_3353_PA00_KRUSKAL_H
