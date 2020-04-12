@@ -1,2 +1,2 @@
 ow output01.txt
-readGraph g1.txt
+MST g1.txt

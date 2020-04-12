@@ -87,7 +87,12 @@ void readControlFile(char* controlFileName) {
             iFile >> arg1;
             iFile >> arg2;
         }
-        else if(instruction == "dc") { ////girvin newman algo to discover communties
+        else if(instruction == "MST") { ////output min spanning tree for a graph text file specified using Kruskal'
+            string fileName;
+            iFile >> fileName;
+            readWeightedGraphInputFile(theMap, fileName);
+            kruskal<string> kruskalAccessor;
+
             //cout << ": "  << endl;
         }
 
@@ -101,23 +106,23 @@ void readControlFile(char* controlFileName) {
 ////control file is data01.txt (contains a GML)
 int main(int argc, char* argv[]) {
     readControlFile("data01.txt"); //command line arg executes program using a "GML"
-    disjointSetInterface<int>* name = new linkedListDisjointSet<int>;
-    name->makeSet(10);
-    name->makeSet(15);
-    name->makeSet(20);
-    name->makeSet(25);
-    name->unionSets(15, 25);
-    name->printSet();
-    name->unionSets(15,20);
-    name->printSet();
-    WeightedGraph<int> hello;
-    hello.addVertex(4);
-    hello.addVertex(5);
-    hello.addVertex(6);
-    hello.addEdge(5,6,1);
-    hello.addEdge(4, 6, 3);
-    vector<Edge<int>> hereweGO = hello.getListOfEdges();
-    vector<Vertex<int>> hahaha = hello.getListOfVertecies();
+//    disjointSetInterface<int>* name = new linkedListDisjointSet<int>;
+//    name->makeSet(10);
+//    name->makeSet(15);
+//    name->makeSet(20);
+//    name->makeSet(25);
+//    name->unionSets(15, 25);
+//    name->printSet();
+//    name->unionSets(15,20);
+//    name->printSet();
+//    WeightedGraph<int> hello;
+//    hello.addVertex(4);
+//    hello.addVertex(5);
+//    hello.addVertex(6);
+//    hello.addEdge(5,6,1);
+//    hello.addEdge(4, 6, 3);
+//    vector<Edge<int>> hereweGO = hello.getListOfEdges();
+//    vector<Vertex<int>> hahaha = hello.getListOfVertecies();
 
 
 //    ofstream oFile;
