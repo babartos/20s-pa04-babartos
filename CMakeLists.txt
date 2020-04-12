@@ -12,7 +12,7 @@ set (EXE_NAME SampleProject)
 # etc....
 
 set (input01 "data01.txt")
-
+set (input02 "g1.txt")
 #
 ##########################################
 
@@ -22,4 +22,4 @@ foreach(file IN LISTS input01 input02 input03 input04)
 endforeach()
 
 set(CMAKE_CXX_STANDARD 17)
-add_executable(${EXE_NAME} main.cpp graph.h disjointSetInterface.h linkedListDisjointSet.h weightedGraph.h)
+add_executable(${EXE_NAME} main.cpp graph.h disjointSetInterface.h linkedListDisjointSet.h weightedGraph.h kruskal.h)

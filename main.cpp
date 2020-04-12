@@ -7,6 +7,7 @@
 #include "disjointSetInterface.h"
 #include "linkedListDisjointSet.h"
 #include "weightedGraph.h"
+#include "kruskal.h"
 using namespace std;
 
 ////READS INPUT FILE (FILE OF DATA AND INPUT TO A GRAPH)
@@ -62,6 +63,7 @@ void readControlFile(char* controlFileName) {
         if(instruction == "readGraph") { ////reads a graph input file (from pa02)
             iFile >> fileName;
             readWeightedGraphInputFile(theMap, fileName); //reads g1.txt
+            int x = 5;
         }
         else if(instruction == "ow") { ////intilizes output file
             iFile >> fileName;
@@ -70,8 +72,6 @@ void readControlFile(char* controlFileName) {
                 cout << "please specify an output file first" << endl;
                 return;
             }
-            outFile << "hello";
-            cout << "output file sucessfully opened" << fileName << endl;
         }
         else if(instruction == "makeSet") { ////makes a new disjoint set with the given node
             string newSetNode;
@@ -100,7 +100,7 @@ void readControlFile(char* controlFileName) {
 ////DRIVER, argv[1] = filename;
 ////control file is data01.txt (contains a GML)
 int main(int argc, char* argv[]) {
-    readControlFile(argv[1]); //command line arg executes program using a "GML"
+    readControlFile("data01.txt"); //command line arg executes program using a "GML"
     disjointSetInterface<int>* name = new linkedListDisjointSet<int>;
     name->makeSet(10);
     name->makeSet(15);
@@ -111,9 +111,15 @@ int main(int argc, char* argv[]) {
     name->unionSets(15,20);
     name->printSet();
     WeightedGraph<int> hello;
+    hello.addVertex(4);
     hello.addVertex(5);
     hello.addVertex(6);
     hello.addEdge(5,6,1);
+    hello.addEdge(4, 6, 3);
+    vector<Edge<int>> hereweGO = hello.getListOfEdges();
+    vector<Vertex<int>> hahaha = hello.getListOfVertecies();
+
+
 //    ofstream oFile;
 //    oFile.open(argv[2]);
 //    oFile << "helloworld";

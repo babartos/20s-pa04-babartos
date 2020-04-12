@@ -34,6 +34,8 @@ private:
 public:
     Edge() {firstVertex = NULL; secondVertex = NULL; weight = 0;}
     Edge(Vertex<T> v1, Vertex<T> v2, unsigned int weight) : firstVertex(v1.getVertex()), secondVertex(v2.getVertex()), weight(weight) {}
+    Vertex<T> getfirstVertex() { return firstVertex; }
+    Vertex<T> getsecondVertex() { return secondVertex; }
 };
 
 
@@ -43,6 +45,8 @@ template <typename T>
 class WeightedGraph {
 private:
     vector<pair<Vertex<T>, vector<Edge<T>>>> myGraph;
+    vector<Edge<T>> listOfEdges;
+    vector<Vertex<T>> listOfVertecies;
     //[i].first = current vertex
     //[i].second = list of adjacent edges
 public:
@@ -50,6 +54,8 @@ public:
     void addVertex(Vertex<T>);
     void addEdge(T, T, unsigned int weight);
     void addEdge(Vertex<T>, Vertex<T>, unsigned int weight);
+    vector<Edge<T>> getListOfEdges();
+    vector<Vertex<T>> getListOfVertecies();
 };
 
 template <typename T>
@@ -65,6 +71,7 @@ void WeightedGraph<T>::addVertex(Vertex<T> element) {
     vector<Edge<T>> newEdgeList;
     newGraphEntry.second = newEdgeList;
     myGraph.push_back(newGraphEntry);
+    listOfVertecies.push_back(element);
 }
 
 template <typename T>
@@ -78,6 +85,7 @@ template <typename T>
 void WeightedGraph<T>::addEdge(Vertex<T> v1, Vertex<T> v2, unsigned int weight) {
     Edge<T> insertEdge = Edge(v1, v2, weight);
     Edge<T> insertEdge2 = Edge(v2, v1, weight);
+    listOfEdges.push_back(insertEdge);
     for(int i = 0; i < myGraph.size(); i++) {
         if(myGraph[i].first.getVertex() == v1.getVertex()) { //makes sure vertecies are equal
             myGraph[i].second.push_back(insertEdge); //push back the
@@ -88,4 +96,12 @@ void WeightedGraph<T>::addEdge(Vertex<T> v1, Vertex<T> v2, unsigned int weight) 
     }
 }
 
+template <typename T>
+vector<Edge<T>> WeightedGraph<T>::getListOfEdges() {
+    return listOfEdges;
+}
+template <typename T>
+vector<Vertex<T>> WeightedGraph<T>::getListOfVertecies() {
+    return listOfVertecies;
+}
 #endif //INC_20S_3353_PA00_WEIGHTEDGRAPH_H
