@@ -75,18 +75,19 @@ void linkedListDisjointSet<T>::unionSets(T element1, T element2) {
 
 template <typename T>
 void linkedListDisjointSet<T>::printSet() {
-    cout << "{";
-    for(int i = 0; i < theSet.size(); i++) {
-        list<T> currList = theSet[i];
-        cout <<"[";
-        typename std::list<T>::iterator it = currList.begin(); //iterator at head of linked list
-        for (int j = 0; j < currList.size(); j++) {
-            cout << *it << ",";
-            std::advance(it, 1); //advance iterator
-        }
-        cout << "] ";
-    }
-    cout << "}" << endl;
+    cout << "need additional operator overloads" << endl;
+//    cout << "{";
+//    for(int i = 0; i < theSet.size(); i++) {
+//        list<T> currList = theSet[i];
+//        cout <<"[";
+//        typename std::list<T>::iterator it = currList.begin(); //iterator at head of linked list
+//        for (int j = 0; j < currList.size(); j++) {
+//            cout << *it << ",";
+//            std::advance(it, 1); //advance iterator
+//        }
+//        cout << "] ";
+//    }
+//    cout << "}" << endl;
 }
 
 template <typename T>
@@ -97,7 +98,8 @@ list<T>* linkedListDisjointSet<T>::find(T findThis) {
         list<T> currList = theSet[i];
         typename std::list<T>::iterator it = currList.begin(); //iterator at head of linked list
         for(int j = 0; j < currList.size(); j++) { //goes through INNER vector
-            if(findThis == *it) { //we have found the element
+            T currentElement = *it;
+            if(findThis == currentElement) { //we have found the element
                 return &theSet[i]; //exit function once found
             }
             std::advance(it, 1); //advance iterator

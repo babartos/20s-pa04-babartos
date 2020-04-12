@@ -91,9 +91,7 @@ void readControlFile(char* controlFileName) {
             string fileName;
             iFile >> fileName;
             readWeightedGraphInputFile(theMap, fileName);
-            kruskal<string> kruskalAccessor;
-
-            //cout << ": "  << endl;
+            kruskal<int> kruskalAccessor;
         }
 
     }
@@ -106,6 +104,8 @@ void readControlFile(char* controlFileName) {
 ////control file is data01.txt (contains a GML)
 int main(int argc, char* argv[]) {
     readControlFile("data01.txt"); //command line arg executes program using a "GML"
+    Edge<int> first;
+    Edge<int> second;
 //    disjointSetInterface<int>* name = new linkedListDisjointSet<int>;
 //    name->makeSet(10);
 //    name->makeSet(15);

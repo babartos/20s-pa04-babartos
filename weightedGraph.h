@@ -13,7 +13,7 @@ class Vertex {
 private:
     T vertex;
 public:
-     T getVertex(){
+     T getVertex() const {
          return vertex;
      }
     void setVertex(T value) {
@@ -23,6 +23,10 @@ public:
         vertex = value;
     }
     Vertex() {;}
+    bool operator==(const Vertex<T>& passed) const {
+         if(passed.getVertex() == this->getVertex()) {return true;}
+         else {return false;}
+     }
 };
 
 template <typename T>
@@ -34,8 +38,20 @@ private:
 public:
     Edge() {firstVertex = NULL; secondVertex = NULL; weight = 0;}
     Edge(Vertex<T> v1, Vertex<T> v2, unsigned int weight) : firstVertex(v1.getVertex()), secondVertex(v2.getVertex()), weight(weight) {}
-    Vertex<T> getfirstVertex() { return firstVertex; }
-    Vertex<T> getsecondVertex() { return secondVertex; }
+    Vertex<T> getfirstVertex() const { return firstVertex; }
+    Vertex<T> getsecondVertex() const { return secondVertex; }
+    int getWeight() const { return weight; }
+    bool operator==(const Edge<T>& passed) const {
+        if (passed.getfirstVertex() == this->firstVertex && passed.getsecondVertex() == this->secondVertex &&
+            this->weight == passed.getWeight()) {
+            return true;
+        }
+        if (passed.getfirstVertex() == this->secondVertex && passed.getsecondVertex() == this->firstVertex &&
+            this->weight == passed.getWeight()) {
+            return true;
+        }
+        return false;
+    }
 };
 
 
