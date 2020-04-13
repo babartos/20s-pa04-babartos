@@ -36,7 +36,7 @@ private:
     Vertex<T> secondVertex;
     unsigned int weight;
 public:
-    Edge() {firstVertex = NULL; secondVertex = NULL; weight = 0;}
+//    Edge() {firstVertex = NULL; secondVertex = NULL; weight = 0;}
     Edge(Vertex<T> v1, Vertex<T> v2, unsigned int weight) : firstVertex(v1.getVertex()), secondVertex(v2.getVertex()), weight(weight) {}
     Vertex<T> getfirstVertex() const { return firstVertex; }
     Vertex<T> getsecondVertex() const { return secondVertex; }

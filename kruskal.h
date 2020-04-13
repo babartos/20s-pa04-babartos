@@ -34,8 +34,8 @@ kruskal::kruskal() { //by default use the trivial disjiont set
 
 kruskal::kruskal(string choice) {
     if (choice == "custom") {
-        vertexList = new customDisjointSet<Vertex<string>>;
-        MinSpanningTree = new customDisjointSet<Edge<string>>;
+//        vertexList = new customDisjointSet<Vertex<string>>;
+//        MinSpanningTree = new customDisjointSet<Edge<string>>;
     }
     else {
         vertexList = new linkedListDisjointSet<Vertex<string>>;

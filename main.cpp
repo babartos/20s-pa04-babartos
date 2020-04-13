@@ -114,7 +114,14 @@ void readControlFile(char* controlFileName) {
 ////control file is data01.txt (contains a GML; defined by instructions)
 int main(int argc, char* argv[]) {
     readControlFile("data01.txt"); //command line arg executes program using a "GML"
-    int hello[4];
+    customDisjointSet<int> hello;
+    hello.makeSet(10);
+    hello.makeSet(2);
+    hello.printRep();
+    int* found = hello.findPriv(2);
+    list<int> find = hello.find(2);
+    hello.unionSets(2,10);
+    cout << endl << "found: " << *found << endl;
     cout << "helloworld";
     return 0;
 }
