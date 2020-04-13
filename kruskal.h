@@ -7,6 +7,7 @@
 
 #include "disjointSetInterface.h"
 #include "linkedListDisjointSet.h"
+#include "customDisjointSet.h"
 #include "weightedGraph.h"
 #include <iostream>
 #include <string>
@@ -20,15 +21,30 @@ private:
     disjointSetInterface<Edge<string>>* MinSpanningTree; //contents of minumum spanning tree
 public:
     kruskal();
+    kruskal(string);
     vector<Edge<string>> kruskalsAlgothrim(WeightedGraph<string>);
     //void kruskalsAlgothrim(WeightedGraph<string>);
 
 };
 
-kruskal::kruskal() { //where you choose
+kruskal::kruskal() { //by default use the trivial disjiont set
     vertexList = new linkedListDisjointSet<Vertex<string>>;
     MinSpanningTree = new linkedListDisjointSet<Edge<string>>;
 }
+
+kruskal::kruskal(string choice) {
+    if (choice == "custom") {
+        vertexList = new customDisjointSet<Vertex<string>>;
+        MinSpanningTree = new customDisjointSet<Edge<string>>;
+    }
+    else {
+        vertexList = new linkedListDisjointSet<Vertex<string>>;
+        MinSpanningTree = new linkedListDisjointSet<Edge<string>>;
+    }
+
+}
+
+
 
 vector<Edge<string>> kruskal::kruskalsAlgothrim(WeightedGraph<string> theGraph) {
     ////KRUSKALS ALGOTHRIM IMPLEMENTATION TO FIND MST BASED OFF CLASS HANDOUT

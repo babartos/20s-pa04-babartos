@@ -88,21 +88,22 @@ void readControlFile(char* controlFileName) {
         }
         else if(instruction == "MST") { ////output min spanning tree for a graph text file specified using Kruskal'
             string fileName;
+            string disjointType;
+            iFile >> disjointType;
             iFile >> fileName;
             //intilize weighted graph:
             WeightedGraph<string> theMap; //a graph to be used
             readWeightedGraphInputFile(theMap, fileName);
             //execute Kruskal Algo
-            kruskal kruskalAccessor = kruskal();
+            kruskal kruskalAccessor = kruskal(disjointType);
             vector<Edge<string>> minSpanTree = kruskalAccessor.kruskalsAlgothrim(theMap);
             //output to file
-            outFile << "Min Spanning Tree for File \"" << fileName << "\":" << endl;
+            outFile << "Min Spanning Tree for File \"" << fileName << "\" using \"" << disjointType << "\" implementation:" << endl;
             for(int i = 0; i < minSpanTree.size(); i++) {
                 outFile << " " << minSpanTree[i].getfirstVertex().getVertex() << " - " << minSpanTree[i].getsecondVertex().getVertex();
                 outFile << "\tweight: " << minSpanTree[i].getWeight();
                 outFile << endl;
             }
-
         }
 
     }
@@ -113,6 +114,7 @@ void readControlFile(char* controlFileName) {
 ////control file is data01.txt (contains a GML; defined by instructions)
 int main(int argc, char* argv[]) {
     readControlFile("data01.txt"); //command line arg executes program using a "GML"
+    int hello[4];
     cout << "helloworld";
     return 0;
 }

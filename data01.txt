@@ -1,3 +1,3 @@
 ow output01.txt
-MST g1.txt
-MST g2.txt
+MST trivial g1.txt
+MST trivial g2.txt

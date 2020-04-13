@@ -18,7 +18,6 @@ public:
     linkedListDisjointSet() {}
     void makeSet(T);
     void unionSets(T,T);
-    void printSet();
     list<T>* find(T);
     int getSize();
 };
@@ -90,23 +89,6 @@ void linkedListDisjointSet<T>::unionSets(T element1, T element2) {
     theSet.erase(theSet.begin() + eraseIndex1);
     theSet.erase(theSet.begin() + (eraseIndex2 - 1));
     theSet.push_back(toInsert);
-}
-
-template <typename T>
-void linkedListDisjointSet<T>::printSet() {
-    cout << "need additional operator overloads" << endl;
-//    cout << "{";
-//    for(int i = 0; i < theSet.size(); i++) {
-//        list<T> currList = theSet[i];
-//        cout <<"[";
-//        typename std::list<T>::iterator it = currList.begin(); //iterator at head of linked list
-//        for (int j = 0; j < currList.size(); j++) {
-//            cout << *it << ",";
-//            std::advance(it, 1); //advance iterator
-//        }
-//        cout << "] ";
-//    }
-//    cout << "}" << endl;
 }
 
 template <typename T>
