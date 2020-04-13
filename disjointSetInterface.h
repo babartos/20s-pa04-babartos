@@ -16,7 +16,7 @@ public:
     disjointSetInterface() {}
     virtual void makeSet(T) = 0;
     virtual void unionSets(T,T) = 0;
-    virtual list<T>* find(T) = 0;
+    virtual list<T> find(T) = 0;
     virtual int getSize() = 0;
 };
 

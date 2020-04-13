@@ -23,7 +23,7 @@ public:
     customDisjointSet() {size = 0; ArrayLength = 0;}
     void makeSet(T);
     void unionSets(T,T);
-    list<T>* find(T); //return a list representation
+    list<T> find(T); //return a list representation
     int getSize();
 };
 
@@ -44,7 +44,7 @@ void customDisjointSet<T>::unionSets(T,T) {
 }
 
 template <typename T>
-list<T>* customDisjointSet<T>::find(T) { //when finding an element, we return a pointer to a linked list representation of our element
+list<T> customDisjointSet<T>::find(T) { //when finding an element, we return a pointer to a linked list representation of our element
     cout << "not implemented";
 }
 
