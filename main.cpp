@@ -114,14 +114,26 @@ void readControlFile(char* controlFileName) {
 ////control file is data01.txt (contains a GML; defined by instructions)
 int main(int argc, char* argv[]) {
     readControlFile("data01.txt"); //command line arg executes program using a "GML"
-    customDisjointSet<int> hello;
-    hello.makeSet(10);
-    hello.makeSet(2);
-    hello.printRep();
-    int* found = hello.findPriv(2);
-    list<int> find = hello.find(2);
-    hello.unionSets(2,10);
-    cout << endl << "found: " << *found << endl;
+    customDisjointSet<Vertex<string>> heere;
+    disjointSetInterface<Vertex<string>>* ha = new customDisjointSet<Vertex<string>>;
+//    customDisjointSet<int> hello;
+//    hello.makeSet(10);
+//    hello.makeSet(3);
+//    hello.makeSet(2);
+//    hello.printRep();
+//    int* found = hello.findPriv(2);
+//    list<int> find = hello.find(2);
+//    hello.unionSets(2,10);
+//    cout << "main.cpp: ";
+//    hello.printRep();
+//    //contains tesing for contains function
+//    list<int> you;
+//    you.push_back(2);
+//    you.push_back(3);
+//    int x = 3;
+//    bool containsd = hello.contains(you, x);
+
+//    cout << endl << "found: " << *found << endl;
     cout << "helloworld";
     return 0;
 }
