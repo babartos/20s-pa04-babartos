@@ -1,3 +1,5 @@
 ow output01.txt
+MST robust g1.txt
 MST trivial g1.txt
+MST robust g2.txt
 MST trivial g2.txt

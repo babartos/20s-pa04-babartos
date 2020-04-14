@@ -97,7 +97,6 @@ void customDisjointSet<T>::unionSets(T element1, T element2) {
         newArray[newArrayIter] = currElement;
         newArrayIter++;
     }
-    cout << "parentRep";
     //printRep();
     //copy root1 and root2 contents into the newArray
     typename std::list<T>::iterator it1 = root1.begin(); //iterator at head of linked list

@@ -8,6 +8,10 @@
 #include "linkedListDisjointSet.h"
 #include "weightedGraph.h"
 #include "kruskal.h"
+#include <chrono>
+#include <ctime>
+#include <cmath>
+#include <cstdlib>
 using namespace std;
 
 ////READS INPUT FILE (FILE OF DATA AND INPUT TO A GRAPH)
@@ -97,8 +101,21 @@ void readControlFile(char* controlFileName) {
             //execute Kruskal Algo
             kruskal kruskalAccessor = kruskal();
             //vector<Edge<string>> minSpanTree = kruskalAccessor.kruskalsAlgothrim(theMap);
-            customDisjointSet<Vertex<string>> test1;
-            vector<Edge<string>> minSpanTree = kruskalAccessor.kruskalsAlgothrim(theMap, test1);
+            //
+            std::chrono::time_point<std::chrono::system_clock> start, end; //varaible declaration
+            start = std::chrono::system_clock::now();
+            vector<Edge<string>> minSpanTree;
+            if(disjointType == "robust") { //request for robust implementation
+                customDisjointSet<Vertex<string>> test1;
+                minSpanTree = kruskalAccessor.kruskalsAlgothrim(theMap, test1);
+            }
+            else { //request for trivial implementation (only two types)
+                minSpanTree = kruskalAccessor.kruskalsAlgothrim(theMap);
+            }
+            end = std::chrono::system_clock::now();
+            std::chrono::duration<double> elapsed_seconds_A = end - start;
+            double lengthA = elapsed_seconds_A.count();
+
             //output to file
             outFile << "Min Spanning Tree for File \"" << fileName << "\" using \"" << disjointType << "\" implementation:" << endl;
             for(int i = 0; i < minSpanTree.size(); i++) {
@@ -106,6 +123,7 @@ void readControlFile(char* controlFileName) {
                 outFile << "\tweight: " << minSpanTree[i].getWeight();
                 outFile << endl;
             }
+            outFile << " ->Execution Time: " << lengthA << endl;
         }
 
     }
@@ -116,35 +134,6 @@ void readControlFile(char* controlFileName) {
 ////control file is data01.txt (contains a GML; defined by instructions)
 int main(int argc, char* argv[]) {
     readControlFile("data01.txt"); //command line arg executes program using a "GML"
-    customDisjointSet<int> here;
-    here.makeSet(10);
-    here.makeSet(15);
-    here.makeSet(20);
-    here.makeSet(25);
-    here.unionSets(15,25);
-    here.unionSets(15,20);
-    cout << endl << "main.cpp" << endl;
-    here.printRep();
-    list<int> hi = here.find(15);
-    //disjointSetInterface<Vertex<string>>* ha = new customDisjointSet<Vertex<string>>;
-//    customDisjointSet<int> hello;
-//    hello.makeSet(10);
-//    hello.makeSet(3);
-//    hello.makeSet(2);
-//    hello.printRep();
-//    int* found = hello.findPriv(2);
-//    list<int> find = hello.find(2);
-//    hello.unionSets(2,10);
-//    cout << "main.cpp: ";
-//    hello.printRep();
-//    //contains tesing for contains function
-//    list<int> you;
-//    you.push_back(2);
-//    you.push_back(3);
-//    int x = 3;
-//    bool containsd = hello.contains(you, x);
-
-//    cout << endl << "found: " << *found << endl;
     cout << "helloworld";
     return 0;
 }

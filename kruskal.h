@@ -35,6 +35,7 @@ kruskal::kruskal() { //by default use the trivial disjiont set
 
 kruskal::kruskal(string choice) {
     if (choice == "custom") {
+        //THIS BREAKS THE PROGRAM; HAD TO HARD CODE A FUNCTION TO PASS IN MY OWN INSTANCE
 //        vertexList = new customDisjointSet<Vertex<string>>;
 //        MinSpanningTree = new customDisjointSet<Edge<string>>;
     }
@@ -114,15 +115,11 @@ vector<Edge<string>> kruskal::kruskalsAlgothrim(WeightedGraph<string> theGraph, 
             string one = currEdge.getfirstVertex().getVertex();
             string two = currEdge.getsecondVertex().getVertex();
             vertexList.unionSets(one, two);
-            cout << "Edge: " << currEdge.getfirstVertex().getVertex() << " - " << currEdge.getsecondVertex().getVertex() << endl;
-            cout << "curr Rep {i}:";
-            vertexList.printRep();
-            cout << endl;
+           // vertexList.printRep();
             //b) add to minumum spanning tree
             //MinSpanningTree->makeSet(currEdge);
             returnVal.push_back(currEdge);
         }
-        cout << endl;
     }
     return returnVal; //returns a vector of edges in the minumum spanning tree
 }
