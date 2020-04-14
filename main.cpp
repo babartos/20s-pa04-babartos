@@ -114,6 +114,7 @@ void readControlFile(char* controlFileName) {
 
     }
     iFile.close();
+    outFile << "*the large set is the \"Karate Data Set\" from PA02";
     outFile.close();
 }
 

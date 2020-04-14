@@ -53,7 +53,10 @@ customDisjointSet<T>::customDisjointSet() {
 template <typename T>
 void customDisjointSet<T>::makeSet(T element) {
     if(parentArray_length + 1 == maxLenghts) { //resize the array
-        //implement me
+        this->maxLenghts = this->maxLenghts * 2;
+        T* temp = new T[this->maxLenghts];
+        delete [] this->parentArray;
+        this->parentArray = temp;
     }
     //push to the end of the array in our "buffer space"
     this->parentArray[this->parentArray_length] = element;
