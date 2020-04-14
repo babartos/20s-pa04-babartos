@@ -12,13 +12,22 @@ set (EXE_NAME SampleProject)
 # etc....
 
 set (input01 "data01.txt")
-set (input02 "g1.txt")
-set (input03 "g2.txt")
+set (input02 "g1_smallGraph_lowDensity.txt")
+set (input03 "g2_smallGraph_medDensity.txt")
+set (input04 "g3_smallGraph_highDensity.txt")
+set (input05 "g4_medGraph_lowDensity.txt")
+set (input06 "g5_medGraph_medDensity.txt")
+set (input07 "g6_medGraph_highDensity.txt")
+set (input08 "g7_largeGraph_lowDensity.txt")
+set (input09 "g8_largeGraph_medDensity.txt")
+set (input10 "g9_largeGraph_highDensity.txt")
+set (input11 "g10_largeGraph_vhighDensity.txt")
+
 #
 ##########################################
 
 # Copy data files to build dir
-foreach(file IN LISTS input01 input02 input03 input04)
+foreach(file IN LISTS input01 input02 input03 input04 input05 input06 input07 input08 input09 input10 input11)
     configure_file(${file} ${file} COPYONLY)
 endforeach()
 

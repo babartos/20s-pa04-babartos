@@ -1,0 +1,18 @@
+[7]
+A
+B
+C
+E
+F
+G
+H
+[undirected]
+F - G 9
+A - B 8
+C - G 7
+B - F 6
+A - H 6
+F - H 5
+A - E 5
+B - C 4
+E - H 3

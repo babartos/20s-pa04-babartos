@@ -17,7 +17,7 @@ using namespace std;
 ////READS INPUT FILE (FILE OF DATA AND INPUT TO A GRAPH)
 void readWeightedGraphInputFile(WeightedGraph<string>& theMap, string fileName) { //reads in a directed file
     const char *here = fileName.c_str();
-    ifstream inFile(here); //opens g1.txt
+    ifstream inFile(here); //opens g1_smallGraph_lowDensity.txt
     if(!inFile.is_open()) {
         cout << "could not find input file" << endl;
         return;
@@ -66,7 +66,7 @@ void readControlFile(char* controlFileName) {
         string fileName;
         if(instruction == "readGraph") { ////reads a graph input file (from pa02)
             iFile >> fileName;
-            readWeightedGraphInputFile(globalMap, fileName); //reads g1.txt
+            readWeightedGraphInputFile(globalMap, fileName); //reads g1_smallGraph_lowDensity.txt
         }
         else if(instruction == "ow") { ////intilizes output file
             iFile >> fileName;
@@ -75,20 +75,6 @@ void readControlFile(char* controlFileName) {
                 cout << "please specify an output file first" << endl;
                 return;
             }
-        }
-        else if(instruction == "makeSet") { ////makes a new disjoint set with the given node
-            string newSetNode;
-            iFile >> newSetNode;
-            //cout << "bfs: " << startNode << endl;
-        }
-        else if(instruction == "find") { ////finds the given node in the graph and returns a ref
-            string nodeToFind;
-            iFile >> nodeToFind;
-        }
-        else if(instruction == "union") { ////finds each disjoint set the element is in then combines both sets
-            string arg1, arg2;
-            iFile >> arg1;
-            iFile >> arg2;
         }
         else if(instruction == "MST") { ////output min spanning tree for a graph text file specified using Kruskal'
             string fileName;
