@@ -95,8 +95,10 @@ void readControlFile(char* controlFileName) {
             WeightedGraph<string> theMap; //a graph to be used
             readWeightedGraphInputFile(theMap, fileName);
             //execute Kruskal Algo
-            kruskal kruskalAccessor = kruskal(disjointType);
-            vector<Edge<string>> minSpanTree = kruskalAccessor.kruskalsAlgothrim(theMap);
+            kruskal kruskalAccessor = kruskal();
+            //vector<Edge<string>> minSpanTree = kruskalAccessor.kruskalsAlgothrim(theMap);
+            customDisjointSet<Vertex<string>> test1;
+            vector<Edge<string>> minSpanTree = kruskalAccessor.kruskalsAlgothrim(theMap, test1);
             //output to file
             outFile << "Min Spanning Tree for File \"" << fileName << "\" using \"" << disjointType << "\" implementation:" << endl;
             for(int i = 0; i < minSpanTree.size(); i++) {
@@ -114,8 +116,17 @@ void readControlFile(char* controlFileName) {
 ////control file is data01.txt (contains a GML; defined by instructions)
 int main(int argc, char* argv[]) {
     readControlFile("data01.txt"); //command line arg executes program using a "GML"
-    customDisjointSet<Vertex<string>> heere;
-    disjointSetInterface<Vertex<string>>* ha = new customDisjointSet<Vertex<string>>;
+    customDisjointSet<int> here;
+    here.makeSet(10);
+    here.makeSet(15);
+    here.makeSet(20);
+    here.makeSet(25);
+    here.unionSets(15,25);
+    here.unionSets(15,20);
+    cout << endl << "main.cpp" << endl;
+    here.printRep();
+    list<int> hi = here.find(15);
+    //disjointSetInterface<Vertex<string>>* ha = new customDisjointSet<Vertex<string>>;
 //    customDisjointSet<int> hello;
 //    hello.makeSet(10);
 //    hello.makeSet(3);

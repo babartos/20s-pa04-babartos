@@ -27,6 +27,9 @@ public:
          if(passed.getVertex() == this->getVertex()) {return true;}
          else {return false;}
      }
+    friend std::ostream& operator<< (std::ostream& output, Vertex<T>& object) {
+        output << object.vertex;
+     }
 };
 
 template <typename T>

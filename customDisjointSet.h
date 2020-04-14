@@ -83,6 +83,8 @@ void customDisjointSet<T>::unionSets(T element1, T element2) {
         newSizeArray[iterOfSizeArray] = this->sizeArray[j];
         iterOfSizeArray++;
     }
+    int mag1 = this->sizeArray[sizeIndex.first];
+    int mag2 = this->sizeArray[sizeIndex.second];
     newSizeArray[iterOfSizeArray] = ( (this->sizeArray[sizeIndex.first]) + (this->sizeArray[sizeIndex.second]) );
     this->sizeArray_length--;
     //deal with parent array
@@ -96,7 +98,7 @@ void customDisjointSet<T>::unionSets(T element1, T element2) {
         newArrayIter++;
     }
     cout << "parentRep";
-    printRep();
+    //printRep();
     //copy root1 and root2 contents into the newArray
     typename std::list<T>::iterator it1 = root1.begin(); //iterator at head of linked list
     for(int i = 0; i < root1.size(); i++) {
@@ -113,7 +115,7 @@ void customDisjointSet<T>::unionSets(T element1, T element2) {
         newArrayIter++;
     }
     //parent array handled
-    printRep();
+    //printRep();
     delete [] this->parentArray;
     delete [] this->sizeArray;
     this->parentArray = newArray;
@@ -149,21 +151,23 @@ int customDisjointSet<T>::getSize() {
 
 template <typename T>
 void customDisjointSet<T>::printRep() {
-//    cout << "parentArr[]: ";
-//    for(int i = 0; i < parentArray_length; i++) {
-//        cout << parentArray[i] << " ";
-//    }
-//    cout << endl << "size[]: ";
-//    for (int i = 0; i < sizeArray_length; i++) {
-//        cout << sizeArray[i] << " ";
-//    }
+    cout << "parentArr[]: ";
+    for(int i = 0; i < parentArray_length; i++) {
+        T element = parentArray[i] ;
+        int x = 4;
+        cout << parentArray[i] << " ";
+    }
+    cout << endl << "size[]: ";
+    for (int i = 0; i < sizeArray_length; i++) {
+        cout << sizeArray[i] << " ";
+    }
 }
 
 template <typename T>
 void customDisjointSet<T>::printRep(T* temp, int n) {
-//    for(int i = 0; i < n; i++) {
-//        cout << temp[i] << " ";
-//    }
+    for(int i = 0; i < n; i++) {
+        cout << temp[i] << " ";
+    }
 }
 
 template <typename T>
@@ -229,7 +233,7 @@ int customDisjointSet<T>::findRootIndex(T child) { //finds the parent of the chi
         int parentArrayIterations = this->sizeArray[iterOfSizeArray];
         for(int i = 0; i < parentArrayIterations; i++) {
             if(this->parentArray[i + indexOfCurrParent] == child) { //found
-                return indexOfCurrParent;
+                return iterOfSizeArray; //NEWWWW
             }
         }
         //if not found
