@@ -14,40 +14,42 @@
 using namespace std;
 //Custom implementation:
 //using arrays to create "virtual trees" in a sense
-//will be explotiing O(1) arrays to get better performance
 //have a size array with the number of elements in each tree
 //each parent will be "mapped" to the size arary
 template <typename T>
 class customDisjointSet : public disjointSetInterface<T> {
 private:
-    T* parentArray; //starts off space for one thousand nodes
+    //private member data:
+    T* parentArray; //starts off space for one hundred nodes
     int* sizeArray;
     int parentArray_length;
     int sizeArray_length;
     int maxLenghts;
-public:
-    customDisjointSet();
-    void makeSet(T);
-    void unionSets(T,T);
-    list<T> find(T); //return a list representation
-    int getSize();
+    //private functions called in makeSet(), union() and makeSet()
     void printRep();
     T* findPriv(T element);
     int findRootIndex(T child);
     T* findRoot(T child);
     bool contains(list<T>&, T&);
     void printRep(T*, int);
+public:
+    customDisjointSet();
+    void makeSet(T);
+    void unionSets(T,T);
+    list<T> find(T); //return a list representation
+    int getSize();
 };
 
 
 template <typename T>
 customDisjointSet<T>::customDisjointSet() {
+    //intilize buffer arrays with length of 100
     this->maxLenghts = 100;
     this->parentArray = new T[maxLenghts];
     this->sizeArray = new int[maxLenghts];
     this->parentArray_length = 0;
     this->sizeArray_length = 0;
-    //start with one hundred
+    //start with one hundred for size
 }
 
 template <typename T>
@@ -58,7 +60,7 @@ void customDisjointSet<T>::makeSet(T element) {
         delete [] this->parentArray;
         this->parentArray = temp;
     }
-    //push to the end of the array in our "buffer space"
+    //push to the end of the array in our "buffer space" for both size and parent array
     this->parentArray[this->parentArray_length] = element;
     this->sizeArray[this->sizeArray_length] = 1;
     this->parentArray_length++;
@@ -67,6 +69,7 @@ void customDisjointSet<T>::makeSet(T element) {
 
 template <typename T>
 void customDisjointSet<T>::unionSets(T element1, T element2) {
+    //variable intilization
     T* newArray = new T[maxLenghts];
     int* newSizeArray = new int[maxLenghts];
     list<T> root1 = find(element1);
@@ -146,13 +149,14 @@ T* customDisjointSet<T>::findPriv(T element) { //when finding an element, we ret
 
 template <typename T>
 int customDisjointSet<T>::getSize() {
-    return 5;
+    return this->maxLenghts;
 }
 
 //functions that are called by the class itself
 
 template <typename T>
 void customDisjointSet<T>::printRep() {
+    //for debugging purposes:
     cout << "parentArr[]: ";
     for(int i = 0; i < parentArray_length; i++) {
         T element = parentArray[i] ;

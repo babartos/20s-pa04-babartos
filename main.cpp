@@ -17,7 +17,7 @@ using namespace std;
 ////READS INPUT FILE (FILE OF DATA AND INPUT TO A GRAPH)
 void readWeightedGraphInputFile(WeightedGraph<string>& theMap, string fileName) { //reads in a directed file
     const char *here = fileName.c_str();
-    ifstream inFile(here); //opens g1_smallGraph_lowDensity.txt
+    ifstream inFile(here); //opens a weighted graph for input
     if(!inFile.is_open()) {
         cout << "could not find input file" << endl;
         return;
@@ -66,7 +66,7 @@ void readControlFile(char* controlFileName) {
         string fileName;
         if(instruction == "readGraph") { ////reads a graph input file (from pa02)
             iFile >> fileName;
-            readWeightedGraphInputFile(globalMap, fileName); //reads g1_smallGraph_lowDensity.txt
+            readWeightedGraphInputFile(globalMap, fileName);
         }
         else if(instruction == "ow") { ////intilizes output file
             iFile >> fileName;
@@ -87,7 +87,7 @@ void readControlFile(char* controlFileName) {
             //execute Kruskal Algo
             kruskal kruskalAccessor = kruskal();
             //vector<Edge<string>> minSpanTree = kruskalAccessor.kruskalsAlgothrim(theMap);
-            //
+            //timing data:
             std::chrono::time_point<std::chrono::system_clock> start, end; //varaible declaration
             start = std::chrono::system_clock::now();
             vector<Edge<string>> minSpanTree;
@@ -121,6 +121,5 @@ void readControlFile(char* controlFileName) {
 ////control file is data01.txt (contains a GML; defined by instructions)
 int main(int argc, char* argv[]) {
     readControlFile("data01.txt"); //command line arg executes program using a "GML"
-    cout << "helloworld";
     return 0;
 }

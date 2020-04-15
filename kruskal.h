@@ -22,9 +22,8 @@ private:
 public:
     kruskal();
     kruskal(string);
-    vector<Edge<string>> kruskalsAlgothrim(WeightedGraph<string>);
-    vector<Edge<string>> kruskalsAlgothrim(WeightedGraph<string>, customDisjointSet<Vertex<string>>);
-    //void kruskalsAlgothrim(WeightedGraph<string>);
+    vector<Edge<string>> kruskalsAlgothrim(WeightedGraph<string>); //uses interface
+    vector<Edge<string>> kruskalsAlgothrim(WeightedGraph<string>, customDisjointSet<Vertex<string>>); //does not use interface
 
 };
 
@@ -35,7 +34,8 @@ kruskal::kruskal() { //by default use the trivial disjiont set
 
 kruskal::kruskal(string choice) {
     if (choice == "custom") {
-        //THIS BREAKS THE PROGRAM; HAD TO HARD CODE A FUNCTION TO PASS IN MY OWN INSTANCE
+        //THIS BREAKS THE PROGRAM; HAD TO HARD CODE A FUNCTION TO PASS IN MY OWN INSTANCE OF CUSTOM DISJOINT SET
+        //CANNOT USE NEW WITH TEMPLATED ARGUMENTS IN A SUBCLASS OF A TEMPLETED CLASS
 //        vertexList = new customDisjointSet<Vertex<string>>;
 //        MinSpanningTree = new customDisjointSet<Edge<string>>;
     }
@@ -67,8 +67,6 @@ vector<Edge<string>> kruskal::kruskalsAlgothrim(WeightedGraph<string> theGraph) 
         Vertex<string> first = currEdge.getfirstVertex();
         string hello = first.getVertex();
         //find set of the first and second vertex in the list
-//        list<Vertex<string>>* tempset1 = vertexList->find(currEdge.getfirstVertex().getVertex());
-//        list<Vertex<string>>* tempset2 = vertexList->find(currEdge.getsecondVertex().getVertex());
         auto tempset1 = vertexList->find(currEdge.getfirstVertex().getVertex());
         auto tempset2 = vertexList->find(currEdge.getsecondVertex().getVertex());
         if(!(tempset1 == tempset2)) { // if FindSet(u) != FindSet(v)
@@ -85,7 +83,7 @@ vector<Edge<string>> kruskal::kruskalsAlgothrim(WeightedGraph<string> theGraph) 
     return returnVal; //returns a vector of edges in the minumum spanning tree
 }
 
-//passing a vertexList
+//for type customDisjointSet
 vector<Edge<string>> kruskal::kruskalsAlgothrim(WeightedGraph<string> theGraph, customDisjointSet<Vertex<string>> vertexList) {
     ////KRUSKALS ALGOTHRIM IMPLEMENTATION TO FIND MST BASED OFF CLASS HANDOUT
     vector<Edge<string>> returnVal;
@@ -105,8 +103,6 @@ vector<Edge<string>> kruskal::kruskalsAlgothrim(WeightedGraph<string> theGraph, 
         Vertex<string> first = currEdge.getfirstVertex();
         string hello = first.getVertex();
         //find set of the first and second vertex in the list
-//        list<Vertex<string>>* tempset1 = vertexList->find(currEdge.getfirstVertex().getVertex());
-//        list<Vertex<string>>* tempset2 = vertexList->find(currEdge.getsecondVertex().getVertex());
         auto tempset1 = vertexList.find(currEdge.getfirstVertex().getVertex());
         auto tempset2 = vertexList.find(currEdge.getsecondVertex().getVertex());
         if(!(tempset1 == tempset2)) { // if FindSet(u) != FindSet(v)
@@ -115,9 +111,7 @@ vector<Edge<string>> kruskal::kruskalsAlgothrim(WeightedGraph<string> theGraph, 
             string one = currEdge.getfirstVertex().getVertex();
             string two = currEdge.getsecondVertex().getVertex();
             vertexList.unionSets(one, two);
-           // vertexList.printRep();
-            //b) add to minumum spanning tree
-            //MinSpanningTree->makeSet(currEdge);
+            //a list of edges that is representitive the MST
             returnVal.push_back(currEdge);
         }
     }

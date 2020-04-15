@@ -35,19 +35,7 @@ void linkedListDisjointSet<T>::unionSets(T element1, T element2) {
     //variable intilization
     list<T> toInsert;
     list<T> ref1 = find(element1);
-//    if(ref1 == nullptr) { //if not an exisiting set, make it and then find a ref to it
-//        makeSet(element1);
-//        ref1 = find(element1);
-//    }
     list<T> ref2 = find(element2);
-//    if (ref2 == nullptr) { //if not an exisiting set, make it and then find a ref to it
-//        makeSet(element2);
-//        ref2 = find(element2);
-//    }
-//    if(ref1 == nullptr || ref2 == nullptr) { //if could not find
-//        cout << "UNION SETS: elements do not exist inside sets ERROR";
-//        return;
-//    }
     //insert contents of ref1 into the "toInsert" linked list
     typename std::list<T>::iterator it = ref1.begin(); //iterator at head of linked list
     for(int i = 0; i < ref1.size(); i++) {
