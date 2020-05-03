@@ -1,5 +1,5 @@
-#ifndef INC_20S_3353_PA00_GRAPH_H
-#define INC_20S_3353_PA00_GRAPH_H
+#ifndef INC_20S_3353_PA00_DIRECTEDGRAPH_H
+#define INC_20S_3353_PA00_DIRECTEDGRAPH_H
 #include <iostream>
 #include <vector>
 #include <stdexcept>
@@ -16,24 +16,24 @@ using namespace std;
 ////Class and function definitions
 //////////////////////////////////
 template <typename T>
-class graph {
+class directedGraph {
 private:
     ////////////////////////////////////////////////////////////////////////////////////
-    //information about my graph implementation:
+    //information about my directedGraph implementation:
     //vector to hold each vertex and list of adjacent elements
     //each inner vector is a list
-    //at index 0 of the list is a vertex of the graph
+    //at index 0 of the list is a vertex of the directedGraph
     //the rest of the list is adjacent elements from said vertex
     //////////////////////////////////////////////////////////////////////////////////////
     //private member data:
     vector<list<T>> theGraph;
     int numVertex = 0; //num of Vertex added total
     ofstream outFile; //output file
-    vector<T> vertexList; //list of every vertex in the graph
+    vector<T> vertexList; //list of every vertex in the directedGraph
     //private functions:
     vector<T> listToVector(list<T>); //given a list returns a vector representation of that list (SO CAN USE [] TO ACCESS)
     void printVectorPair(vector<pair<T,T>>); //for debugging purposes
-    bool isContinous(); //if graph is continous returns true; can reach every other node from a node
+    bool isContinous(); //if directedGraph is continous returns true; can reach every other node from a node
     list<T> getInnerList(T head); //given a head returns a linked list
     //begin girvin newman calculation functions
     vector<pair<T, double>> getLevelValues(vector<pair<T,T>>); //given a tree returns how many traversals or "levels" to get to head/parent node
@@ -42,12 +42,12 @@ private:
 public:
     void addVertex(T vertex); //add a new element or list to the vector. The Head contains the
     void addEdge(T vertex1, T vertex2); //add a connection between two vertecies (undirected)
-    void removeEdge(T vertex1 , T vertex2); //delete an edge of the graph
+    void removeEdge(T vertex1 , T vertex2); //delete an edge of the directedGraph
     void printDFS(T start); //does a depth first traversal given the started vertex
     void printBFS(T start); //does a breadth first traversal given the starting vertex
     void printBFS(T start, T end); //finds the shortest path between the start and end
     vector<pair<T, T>> bfs(T start); //does a breadth first search given a starting node, returns a vector with corresponding edges
-    vector<pair<pair<T,T>, double>> calculateBetweeness(); //calculates betweeness of all edges of the graph
+    vector<pair<pair<T,T>, double>> calculateBetweeness(); //calculates betweeness of all edges of the directedGraph
     void GirvinNewman(); //called when user types dc
     void makeConnection(T arg1, T arg2); //finds shortest path between two elements (calls bfs with T start, T end)
     void makeIntoTree(vector<pair<T,T>>& head); //takes in the head and returns a tree
@@ -56,13 +56,13 @@ public:
 };
 
 ////////////////////////////////////////////////////////////
-////adds a vertex in the form of a linked list to the graph
+////adds a vertex in the form of a linked list to the directedGraph
 ////////////////////////////////////////////////////////////
 template <typename T>
-void graph<T>::addVertex(T vertex) {
+void directedGraph<T>::addVertex(T vertex) {
     numVertex = numVertex + 1;
     vertexList.push_back(vertex);
-    list<T> temp; //to be inserted to the graph
+    list<T> temp; //to be inserted to the directedGraph
     temp.push_back(vertex); // add the vertex as the head of a list
     theGraph.push_back(temp);
 }
@@ -70,25 +70,25 @@ void graph<T>::addVertex(T vertex) {
 ////adds an undirected edge; adds A->B and B->A
 /////////////////////////////////////////////////
 template <typename T>
-void graph<T>::addEdge(T vertex1, T vertex2) {
+void directedGraph<T>::addEdge(T vertex1, T vertex2) {
     if (vertex1 == vertex2) { return; } //do nothing in this case
-    //find vertex 1 in the graph linearly.
+    //find vertex 1 in the directedGraph linearly.
     for (int i = 0; i < theGraph.size(); i++) {
         list <T> cmp = theGraph[i];
         if (vertex1 == cmp.front()) {
             theGraph[i].push_back(vertex2); //push back the vertex2 as an edge of vertex 1
         }
-        if (vertex2 == cmp.front()) {
-            theGraph[i].push_back(vertex1); //push back the vertex1 as an edge of vertex 2
-        }
+//        if (vertex2 == cmp.front()) {
+//            theGraph[i].push_back(vertex1); //push back the vertex1 as an edge of vertex 2
+//        }
     }
 }
 
 /////////////////////////////////
-////delete an edge of the graph
+////delete an edge of the directedGraph
 //////////////////////////////////
 template <typename T>
-void graph<T>::removeEdge(T vertex1 , T vertex2) {
+void directedGraph<T>::removeEdge(T vertex1 , T vertex2) {
     ////remove both of these edges
     pair<T,T> removeThis;
     removeThis.first = vertex1;
@@ -118,7 +118,7 @@ void graph<T>::removeEdge(T vertex1 , T vertex2) {
 ////BREADTH FIRST SEARCH OF ALL PATHS FOR A START VERTEX; OUTPUT TO FILE
 ///////////////////////////////////////////////////////////////////////////
 template <typename T>
-void graph<T>::printBFS(T start) {
+void directedGraph<T>::printBFS(T start) {
     if(!outFile.is_open()) { //do nothing if output file is not open
         cout << "please specify an output file first" << endl;
         return;
@@ -219,7 +219,7 @@ void graph<T>::printBFS(T start) {
 ////BREADTH FIRST SEARCH FOR SHORTEST PATH BETWEEN TWO ELEMENTS; OUTPUT TO FILE
 ///////////////////////////////////////////////////////////////////////////////////
 template <typename T>
-void graph<T>::printBFS(T start, T end) { //determines shortest distance between two elements on a graph
+void directedGraph<T>::printBFS(T start, T end) { //determines shortest distance between two elements on a directedGraph
     ////do nothing if output file is not open
     if(!outFile.is_open()) {
         cout << "please specify an output file first" << endl;
@@ -337,7 +337,7 @@ void graph<T>::printBFS(T start, T end) { //determines shortest distance between
 //////////////////////////////////
 
 template <typename T>
-void graph<T>::printDFS(T start) {
+void directedGraph<T>::printDFS(T start) {
     ////variable declarations
     //outFile << "dfs: " << endl;
     vector<T> shortestPath;
@@ -447,7 +447,7 @@ void graph<T>::printDFS(T start) {
 //// Breadth first search instead of outputting to file returns a vector
 ///////////////////////////////////////////////////////////////////////////
 template <typename T>
-vector<pair<T, T>> graph<T>::bfs(T start) {////do nothing if output file is not open
+vector<pair<T, T>> directedGraph<T>::bfs(T start) {////do nothing if output file is not open
     ////variable declarations
     vector<T> shortestPath;
     vector<pair<T, int>> vertexValues; //list of vertecies value and what value they contain
@@ -540,7 +540,7 @@ vector<pair<T, T>> graph<T>::bfs(T start) {////do nothing if output file is not 
 ////timeout error would be caused w/recalc
 ////for a smallGraph and mediumGraph (karate data set) size betweeness is recalculated at half size
 ////for a largeGraph (football data set) size betweeness is calculated once
-////"when to stop condition" is when then the graph is no longer continous to a large section of the other
+////"when to stop condition" is when then the directedGraph is no longer continous to a large section of the other
 ////this is checked in the bool isContinous() function
 ////basically there will be two large communties and maybe a few smaller ones
 ////ideally the girvin newman algothrim could be called on these sub communties breaking them up even futher untill a desired size is reached
@@ -548,27 +548,27 @@ vector<pair<T, T>> graph<T>::bfs(T start) {////do nothing if output file is not 
 ////severe errors due occur because  of the frequency of edge betweeness calcualtion, however I believe the general steps are correct
 
 template <typename T>
-void graph<T>::GirvinNewman() { //steps are outlined in comments
+void directedGraph<T>::GirvinNewman() { //steps are outlined in comments
     outFile << "dc:" << endl;
     ////start girvin newman algo:
     /////1) CALCULATE BETWEENESS VALUE
     vector<pair<pair<T, T>, double>> currEdgeBetweeness = calculateBetweeness();
     int everyEdgeinGraphSize = currEdgeBetweeness.size(); //iterate this many times
-    ////determine graph size:   (see notes for more info)
+    ////determine directedGraph size:   (see notes for more info)
     bool smallGraph = false;
     bool medGraph = false;
     bool largeGraph = true;
-    if(everyEdgeinGraphSize < 90 && everyEdgeinGraphSize > 20)  { //What I define to be medium size graph
+    if(everyEdgeinGraphSize < 90 && everyEdgeinGraphSize > 20)  { //What I define to be medium size directedGraph
         medGraph = true;
         largeGraph = false;
     }
-    else if(everyEdgeinGraphSize < 20) { //what I define to be a small graph
+    else if(everyEdgeinGraphSize < 20) { //what I define to be a small directedGraph
         smallGraph = true;
         largeGraph = false;
     }
     int half = currEdgeBetweeness.size() / 2; //can only have manpower to recalc edges once
-    //end graph size
-    ////begin edge removal:     (Will go until graph is not continous)
+    //end directedGraph size
+    ////begin edge removal:     (Will go until directedGraph is not continous)
     for(int k = 0; k < everyEdgeinGraphSize; k++) {
         if(smallGraph || medGraph) {
             ////3) THE EDGES BETWEENESS ARE RECALULATED AFTER REMOVAL
@@ -591,7 +591,7 @@ void graph<T>::GirvinNewman() { //steps are outlined in comments
         currEdgeBetweeness.erase(currEdgeBetweeness.begin() + index);
         ////CHECK IF CONTINOUS BEFORE REMOVING
         bool continous = isContinous();
-        if(!continous) { //when to stop conditions; cannot reach another substantial (>2) portion of graph
+        if(!continous) { //when to stop conditions; cannot reach another substantial (>2) portion of directedGraph
             ////4) stop when communties are formed
             break;
         }
@@ -602,7 +602,7 @@ void graph<T>::GirvinNewman() { //steps are outlined in comments
     //////////////////////////////////////
     ////outputting the found Communtities:
     /////////////////////////////////////
-    vector<vector<T>> here = identifyCommuntities(); //finds communties that exist in graph made by girvin newman algo
+    vector<vector<T>> here = identifyCommuntities(); //finds communties that exist in directedGraph made by girvin newman algo
     vector<T> unid;
     for(int i = 0 ; i < here.size(); i++) {
         vector<T> currCommunity = here[i];
@@ -631,7 +631,7 @@ void graph<T>::GirvinNewman() { //steps are outlined in comments
 ////function to calculate the betweenes for every edge; pair1 = edge pair2 = edgeBetweenessValue
 ////////////////////////////////////////////////////////////////////////////////////////////////
 template <typename T>
-vector<pair<pair<T,T>, double>> graph<T>::calculateBetweeness() {
+vector<pair<pair<T,T>, double>> directedGraph<T>::calculateBetweeness() {
     ////for ever vertex perform a breadth first search in order to get "trees" starting with said vertex
     vector<pair<pair<T,T>, double>> returnVal;
     ////INTILIZE EVERY VALUE TO IN RETURN VAL TO CORRESPONDING GRAPH LOCATION
@@ -666,7 +666,7 @@ vector<pair<pair<T,T>, double>> graph<T>::calculateBetweeness() {
               ////If edge exists do not add it
         }
     }
-    for(int i = 0; i < theGraph.size(); i++) { //for every list in teh graph
+    for(int i = 0; i < theGraph.size(); i++) { //for every list in teh directedGraph
         list<T> currList = theGraph[i]; ////CHANGE TO I
         T head = currList.front();
         //get all adj edges
@@ -705,10 +705,10 @@ vector<pair<pair<T,T>, double>> graph<T>::calculateBetweeness() {
 ////takes in a breadth first search, and adds edges not found; Result is a tree with vertex[0] being head of tree
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template <typename T>
-void graph<T>::makeIntoTree(vector<pair<T,T>>& tree) {
+void directedGraph<T>::makeIntoTree(vector<pair<T,T>>& tree) {
     vector<pair<T,T>> temp;
     for (int i = 0; i < tree.size(); i++) {temp.push_back(tree[i]);}
-    /////for every element in the graph
+    /////for every element in the directedGraph
     for(int i = 0; i < theGraph.size(); i++) {
         ////find that linked list
         list<T> curr = theGraph[i];
@@ -751,8 +751,8 @@ void graph<T>::makeIntoTree(vector<pair<T,T>>& tree) {
 /////given a tree returns how many traversals or "levels" to get to head/parent node
 ///////////////////////////////////////////////////////////////////////////////////
 template <typename T>
-vector<pair<T, double>> graph<T>::getLevelValues(vector<pair<T,T>> tree) {
-    T head = tree[0].first; //gets access to the head of the graph
+vector<pair<T, double>> directedGraph<T>::getLevelValues(vector<pair<T,T>> tree) {
+    T head = tree[0].first; //gets access to the head of the directedGraph
     ////values of the vertex levels
     vector<pair<T, double>> vertexLevels;
     pair<T, double> headVertex;
@@ -833,7 +833,7 @@ vector<pair<T, double>> graph<T>::getLevelValues(vector<pair<T,T>> tree) {
 ////This calculates the betweeness value for all edges of a tree
 ///////////////////////////////////////////////////////////////////
 template <typename T>
-vector<pair<pair<T,T>, double>> graph<T>::calculateEdgeBetweenessWeight(vector<pair<T,double>> levelValues, vector<pair<T,T>> tree) {
+vector<pair<pair<T,T>, double>> directedGraph<T>::calculateEdgeBetweenessWeight(vector<pair<T,double>> levelValues, vector<pair<T,T>> tree) {
     ////intilize the edgeValues vector
     vector<pair<pair<T,T>, double>> edgeValues; //stores an edge along with a value
     for (int i = 0; i < tree.size(); i++) {
@@ -994,7 +994,7 @@ vector<pair<pair<T,T>, double>> graph<T>::calculateEdgeBetweenessWeight(vector<p
 ////final step of Girvin-Newman algo, retrieves given communties
 //////////////////////////////////////////////////////////////////
 template <typename T>
-vector<vector<T>> graph<T>::identifyCommuntities() {
+vector<vector<T>> directedGraph<T>::identifyCommuntities() {
     //intilize the return value "communityList"
     vector<vector<T>> communityList;
     //intilize the list
@@ -1085,13 +1085,13 @@ vector<vector<T>> graph<T>::identifyCommuntities() {
 
 //begin "utility functions:"
 template <typename T>
-vector<T> graph<T>::listToVector(list<T> curr) { //converts a linked list to a vector
+vector<T> directedGraph<T>::listToVector(list<T> curr) { //converts a linked list to a vector
     vector<T> myVector(curr.begin(), curr.end());
     return myVector;
 }
 
 template <typename T>
-void graph<T>::printVectorPair(vector<pair<T,T>> tree) { //prints a vector of pairs to the screen
+void directedGraph<T>::printVectorPair(vector<pair<T,T>> tree) { //prints a vector of pairs to the screen
     cout << "tree" << endl;
     for (int j = 0; j < tree.size(); j++) {
         pair<T,T> current;
@@ -1102,7 +1102,7 @@ void graph<T>::printVectorPair(vector<pair<T,T>> tree) { //prints a vector of pa
 }
 
 template <typename T>
-list<T> graph<T>::getInnerList(T head) { //given a node linearly searches for that linked list in the graph
+list<T> directedGraph<T>::getInnerList(T head) { //given a node linearly searches for that linked list in the directedGraph
     for (int i = 0; i < theGraph.size(); i++) {
         list<T> curr = theGraph[i];
         if(curr.front() == head) {
@@ -1112,7 +1112,7 @@ list<T> graph<T>::getInnerList(T head) { //given a node linearly searches for th
 }
 
 template <typename T>
-void graph<T>::makeConnection(T arg1, T arg2) { ////find shortest path and output to screen
+void directedGraph<T>::makeConnection(T arg1, T arg2) { ////find shortest path and output to screen
     ////do nothing if output file is not open
     if(!outFile.is_open()) {
         cout << "please specify an output file first" << endl;
@@ -1124,7 +1124,7 @@ void graph<T>::makeConnection(T arg1, T arg2) { ////find shortest path and outpu
 }
 
 template <typename T>
-bool graph<T>::isContinous() {////returns true if every node is connected to another node; our stop condition
+bool directedGraph<T>::isContinous() {////returns true if every node is connected to another node; our stop condition
     //does a bfs and looks at all nodes it can get to
     vector<pair<T,T>> first = bfs(theGraph[0].front());
     //take the results of bfs and puts all nodes head vertex can get to
@@ -1191,10 +1191,10 @@ bool graph<T>::isContinous() {////returns true if every node is connected to ano
 }
 
 ////////////////////////////////////////////////////
-//// Open up a file for input/output in graph class
+//// Open up a file for input/output in directedGraph class
 ////////////////////////////////////////////////////
 template <typename T>
-void graph<T>::setOutFile(const char* fileName) { //
+void directedGraph<T>::setOutFile(const char* fileName) { //
     outFile.open(fileName);
     if(!outFile.is_open()) { //output file is not open
         cout << "please specify an output file first" << endl;
@@ -1207,7 +1207,7 @@ void graph<T>::setOutFile(const char* fileName) { //
 
 
 template <typename T>
-void graph<T>::setInFile(const char* fileName) { //output the input file name
+void directedGraph<T>::setInFile(const char* fileName) { //output the input file name
     if(!outFile.is_open()) {}
     else {
         outFile << "or: " << endl;
@@ -1215,4 +1215,4 @@ void graph<T>::setInFile(const char* fileName) { //output the input file name
     }
 }
 
-#endif //INC_20S_3353_PA00_GRAPH_H
+#endif //INC_20S_3353_PA00_DIRECTEDGRAPH_H

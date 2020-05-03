@@ -7,16 +7,16 @@
 
 #include <iostream>
 #include <string>
-#include "graph.h"
+#include "directedGraph.h"
 using namespace std;
 
 class trivialSoln {
 public:
     //trivialSoln();
-    void readGraphInputFile(string fileName); //reads in a graph file
+    void readGraphInputFile(string fileName); //reads in a directedGraph file
     void outputCommunties();
 private:
-    graph<string> theMap;
+    directedGraph<string> theMap;
 
 };
 

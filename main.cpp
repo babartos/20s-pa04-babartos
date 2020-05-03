@@ -3,24 +3,24 @@
 #include <ostream>
 #include <string>
 #include <vector>
-#include "graph.h"
+#include "directedGraph.h"
 #include "trivialSoln.h"
 using namespace std;
 
 //////READS INPUT FILE (FILE OF DATA AND INPUT TO A GRAPH)
-//void readInputFile(graph<string>& theMap, string fileName) { //reads in a directed file
+//void readInputFile(directedGraph<string>& theMap, string fileName) { //reads in a directed file
 //    const char *here = fileName.c_str();
 //    theMap.setInFile(here);
 //    ifstream inFile(here); //opens g1.txt
 //    if(!inFile.is_open()) {
-//        cout << "could not find graph input file: " << fileName << endl;
+//        cout << "could not find directedGraph input file: " << fileName << endl;
 //        return;
 //    }
 //    int lineNum;
 //    inFile.ignore();// ignore [
 //    inFile >> lineNum; //number of vertex
 //    inFile.ignore(); //ignore ]
-//    for (int i = 0; i < lineNum; i++) { //add all vertecies ot the graph
+//    for (int i = 0; i < lineNum; i++) { //add all vertecies ot the directedGraph
 //        string temp;
 //        inFile >> temp;
 //        theMap.addVertex(temp);
@@ -37,7 +37,7 @@ using namespace std;
 //        inFile >> vertex1;
 //        inFile >> dash;
 //        inFile >> vertex2;
-//        theMap.addEdge(vertex1, vertex2); //add edge to an undirected graph
+//        theMap.addEdge(vertex1, vertex2); //add edge to an undirected directedGraph
 //    }
 //    ////TEMPORARY
 //    inFile.close();
@@ -45,7 +45,7 @@ using namespace std;
 //
 ///////READS A CONTROL FILE AND EXECUTES BASED UPON INSTRUCTIONS
 //void readControlFile(char* controlFileName) {
-//    graph<string> theMap;
+//    directedGraph<string> theMap;
 //    ifstream iFile(controlFileName); //CONTROL FILE NAME (data01.txt)
 //    if (!iFile.is_open()) { //check to see if file is open
 //        cout << "could not open specificed file: " << controlFileName << endl;
@@ -88,6 +88,9 @@ using namespace std;
 
 ////DRIVER, argv[1] = filename;
 int main(int argc, char* argv[]) {
+    //PROBLEM: check if a directed graph is strongly connected
+    //a graph is strongly connected if there is a path between every two pairs of verticies
+
     string fileName = "g1.txt";
     //readControlFile(fileName); //command line arg executes program
     trivialSoln firstSolution;

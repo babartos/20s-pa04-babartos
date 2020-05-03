@@ -10,14 +10,14 @@ void trivialSoln::readGraphInputFile(string fileName) { //reads in a directed fi
     theMap.setInFile(here);
     ifstream inFile(here); //opens g1.txt
     if(!inFile.is_open()) {
-        cout << "could not find graph input file: " << fileName << endl;
+        cout << "could not find directedGraph input file: " << fileName << endl;
         return;
     }
     int lineNum;
     inFile.ignore();// ignore [
     inFile >> lineNum; //number of vertex
     inFile.ignore(); //ignore ]
-    for (int i = 0; i < lineNum; i++) { //add all vertecies ot the graph
+    for (int i = 0; i < lineNum; i++) { //add all vertecies ot the directedGraph
         string temp;
         inFile >> temp;
         theMap.addVertex(temp);
@@ -34,13 +34,15 @@ void trivialSoln::readGraphInputFile(string fileName) { //reads in a directed fi
         inFile >> vertex1;
         inFile >> dash;
         inFile >> vertex2;
-        theMap.addEdge(vertex1, vertex2); //add edge to an undirected graph
+        theMap.addEdge(vertex1, vertex2); //add edge to an undirected directedGraph
     }
     ////TEMPORARY
     inFile.close();
 }
 
 void trivialSoln::outputCommunties()  {
-    string start = "A";
+    string start = "3";
+    cout << "DFS 0";
     theMap.printDFS(start);
+
 }

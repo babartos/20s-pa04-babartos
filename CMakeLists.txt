@@ -23,4 +23,4 @@ foreach(file IN LISTS input01 input02)
 endforeach()
 
 set(CMAKE_CXX_STANDARD 17)
-add_executable(${EXE_NAME} main.cpp graph.h disjointSetInterface.h weightedGraph.h trivialSoln.cpp trivialSoln.h)
+add_executable(${EXE_NAME} main.cpp directedGraph.h disjointSetInterface.h weightedGraph.h trivialSoln.cpp trivialSoln.h)
