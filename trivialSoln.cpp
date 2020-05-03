@@ -6,6 +6,7 @@
 #include <string>
 
 void trivialSoln::readGraphInputFile(string fileName) { //reads in a directed file
+    this->CurrentFileName = fileName;
     const char *here = fileName.c_str();
     theMap.setInFile(here);
     ifstream inFile(here); //opens g1.txt
@@ -40,9 +41,12 @@ void trivialSoln::readGraphInputFile(string fileName) { //reads in a directed fi
     inFile.close();
 }
 
-void trivialSoln::outputCommunties()  {
-    string start = "3";
+void trivialSoln::outputStronglyConnected()  {
+    ofstream outFile;
+    outFile.open("outputTrivial.txt");
+    string start = "2";
     cout << "DFS 0";
     theMap.printDFS(start);
-
+    outFile << this->CurrentFileName;
+    outFile.close();
 }

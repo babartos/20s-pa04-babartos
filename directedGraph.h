@@ -431,6 +431,7 @@ void directedGraph<T>::printDFS(T start) {
                 priority.pop();
             }
         } //end while loop
+        break; ////NEWWW
     } //DEPTH FIRST SEARCH COMPLETED
     ////OUTPUT ALL EDGES
     for (int w = 0; w < edges.size(); w++) {

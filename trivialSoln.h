@@ -14,9 +14,10 @@ class trivialSoln {
 public:
     //trivialSoln();
     void readGraphInputFile(string fileName); //reads in a directedGraph file
-    void outputCommunties();
+    void outputStronglyConnected();
 private:
     directedGraph<string> theMap;
+    string CurrentFileName;
 
 };
 

@@ -95,7 +95,7 @@ int main(int argc, char* argv[]) {
     //readControlFile(fileName); //command line arg executes program
     trivialSoln firstSolution;
     firstSolution.readGraphInputFile(fileName);
-    firstSolution.outputCommunties();
+    firstSolution.outputStronglyConnected();
 
     cout << "helloworld" << endl;
     return 0;
