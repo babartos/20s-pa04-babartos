@@ -1,21 +1,3 @@
-ow output01.txt
-MST robust g1_smallGraph_lowDensity.txt
-MST trivial g1_smallGraph_lowDensity.txt
-MST robust g2_smallGraph_medDensity.txt
-MST trivial g2_smallGraph_medDensity.txt
-MST robust g3_smallGraph_highDensity.txt
-MST trivial g3_smallGraph_highDensity.txt
-MST robust g4_medGraph_lowDensity.txt
-MST trivial g4_medGraph_lowDensity.txt
-MST robust g5_medGraph_medDensity.txt
-MST trivial g5_medGraph_medDensity.txt
-MST robust g6_medGraph_highDensity.txt
-MST trivial g6_medGraph_highDensity.txt
-MST robust g7_largeGraph_lowDensity.txt
-MST trivial g7_largeGraph_lowDensity.txt
-MST robust g8_largeGraph_medDensity.txt
-MST trivial g8_largeGraph_medDensity.txt
-MST robust g9_largeGraph_highDensity.txt
-MST trivial g9_largeGraph_highDensity.txt
-MST robust g10_largeGraph_vhighDensity.txt
-MST trivial g10_largeGraph_vhighDensity.txt
+ow outputDFS.txt
+or g1.txt
+dfs B

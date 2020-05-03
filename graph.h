@@ -338,13 +338,8 @@ void graph<T>::printBFS(T start, T end) { //determines shortest distance between
 
 template <typename T>
 void graph<T>::printDFS(T start) {
-    ////do nothing if output file is not open
-    if(!outFile.is_open()) {
-        cout << "please specify an output file first" << endl;
-        return;
-    }
     ////variable declarations
-    outFile << "dfs: " << endl;
+    //outFile << "dfs: " << endl;
     vector<T> shortestPath;
     vector<pair<T, int>> vertexValues; //list of vertecies value and what value they contain
     vector<pair<T, T>> edges; //list of edges between things
@@ -442,7 +437,9 @@ void graph<T>::printDFS(T start) {
         pair<T,T> current = edges[w];
         T a = current.first;
         T b = current.second;
-        outFile << " (" << a << " - " << b << ")" << endl;
+        //outFile << " (" << a << " - " << b << ")" << endl;
+        std::cout << " (" << a << " - " << b << ")" << endl;
+
     }
 }
 

@@ -1,0 +1,10 @@
+[4]
+A
+B
+C
+D
+[undirected]
+A - B
+A - D
+C - D
+B - D
