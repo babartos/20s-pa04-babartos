@@ -54,6 +54,23 @@ void robustSoln::readGraphInputFile(string fileName) { //reads in a directedGrap
 }
 
 void robustSoln::outputStronglyConnected() {
+    ////1) Initialize all vertices as not visited.
 
+    ////2) Do a DFS traversal of graph starting from any arbitrary vertex v. If DFS traversal doesn’t visit all vertices, then return false.
+
+    ////3) Reverse the graph
+
+    /////4) Mark all vertices as not-visited in reversed graph
+
+    /////5) 5) Do a DFS traversal of reversed graph starting from same vertex v (Same as step 2).
+    /// If DFS traversal doesn’t visit all vertices, then return false. Otherwise return true.
 }
 
+
+void robustSoln::outputStronglyConnected(string fileName) {
+    if(theMap.getNumVertex() > 0) {
+        theMap.clear();
+    }
+    readGraphInputFile(fileName);
+    outputStronglyConnected();
+}
