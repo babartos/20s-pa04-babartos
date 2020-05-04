@@ -61,6 +61,7 @@ void trivialSoln::outputStronglyConnected()  {
     for (int i = 0; i < vertecies.size(); i++) {
         outFile << "DFS @ " << vertecies[i] << ":" << endl;
         vector<pair<string, string>> edges = theMap.DFS(vertecies[i]);
+        if(edges.size() == 0) {outFile << " none" << endl;}
         vector<string> reachableVertecies;
         for (int i = 0; i < edges.size(); i++) {
             outFile << " " << edges[i].first << " - " << edges[i].second << endl;
@@ -97,9 +98,8 @@ void trivialSoln::outputStronglyConnected()  {
 ////source: https://www.geeksforgeeks.org/connectivity-in-a-directed-graph/?ref=rp
 
 void trivialSoln::outputStronglyConnected(string fileName) {
-    if(theMap.getNumVertex() > 0) {
-        theMap.clear();
-    }
+    theMap.clear();
     readGraphInputFile(fileName);
+    outFile << "------------------------" << endl;
     outputStronglyConnected();
 }

@@ -5,6 +5,7 @@
 #include <vector>
 #include "directedGraph.h"
 #include "trivialSoln.h"
+#include "robustSoln.h"
 using namespace std;
 
 int main(int argc, char* argv[]) {
@@ -17,7 +18,9 @@ int main(int argc, char* argv[]) {
     firstSolution.outputStronglyConnected(fileName1);
     firstSolution.outputStronglyConnected(fileName2);
     ////2) Non-Trivial solution using Kosajru's algorithm
-
+    robustSoln secondSolution;
+    secondSolution.outputStronglyConnected(fileName1);
+    secondSolution.outputStronglyConnected(fileName2);
     cout << "helloworld" << endl;
     return 0;
 }

@@ -54,7 +54,9 @@ void robustSoln::readGraphInputFile(string fileName) { //reads in a directedGrap
 }
 
 void robustSoln::outputStronglyConnected() {
+    ////Kosaraju’s DFS based simple algorithm that does two DFS traversals:
     ////1) Initialize all vertices as not visited.
+    outFile << "graph \"" << this->CurrentFileName << "\":" << endl;
     vector<string> vertexList = theMap.getVertecies();
     vector<pair<string, bool>> visited; //bool value = 0 if not visited; bool value = 1 if visited
     if(vertexList.size() == 0) {cout << "error in making the map" << endl;}
@@ -65,20 +67,61 @@ void robustSoln::outputStronglyConnected() {
         visited.push_back(toPush);
     }
     ////2) Do a DFS traversal of graph starting from any arbitrary vertex v. If DFS traversal doesn’t visit all vertices, then return false.
-
-    ////3) Reverse the graph
-
+    string arbirtaryVertex = vertexList[0];
+    vector<pair<string, string>> DFSresults = theMap.DFS(arbirtaryVertex); //DFS from a random vertex
+    outFile << "DFS @ arbitrary vertex " << arbirtaryVertex << ":" << endl;
+    for(int i = 0; i < DFSresults.size(); i++) {
+        string a = DFSresults[i].first;
+        string b = DFSresults[i].second;
+        outFile << " " << a << " - " << b << endl;
+        for(int j = 0; j < visited.size(); j++) {
+            if(visited[j].first == a || visited[j].first == b) {
+                visited[j].second = true;
+            }
+        }
+    }
+    for(int i = 0; i < visited.size(); i++) {
+        if(visited[i].second == false) {
+            //If DFS traversal doesn’t visit all vertices, then return false.
+            outFile << "Since the DFS traversal doesn't visit all vertices, the graph is not strongly connected" << endl;
+            return;
+        }
+    }
+    ////3) Reverse/transpose the graph
+    theMap.transpose();
     /////4) Mark all vertices as not-visited in reversed graph
-
+    for(int i = 0; i < visited.size(); i++) {
+        visited[i].second = false;
+    }
     /////5) 5) Do a DFS traversal of reversed graph starting from same vertex v (Same as step 2).
     /// If DFS traversal doesn’t visit all vertices, then return false. Otherwise return true.
+    vector<pair<string, string>> DFSresults2 = theMap.DFS(arbirtaryVertex); //DFS from a random vertex
+    outFile << "DFS @ arbitrary vertex " << arbirtaryVertex << ": (after transposing graph)" << endl;
+    for(int i = 0; i < DFSresults2.size(); i++) {
+        string a = DFSresults2[i].first;
+        string b = DFSresults2[i].second;
+        outFile << " " << a << " - " << b << endl;
+        for(int j = 0; j < visited.size(); j++) {
+            if(visited[j].first == a || visited[j].first == b) {
+                visited[j].second = true;
+            }
+        }
+    }
+    if(DFSresults2.size() == 0) {outFile << " none" << endl;}
+    for(int i = 0; i < visited.size(); i++) {
+        if(visited[i].second == false) {
+            //If DFS traversal doesn’t visit all vertices, then return false.
+            outFile << "Since the DFS traversal doesn't visit all vertices, the graph is not strongly connected" << endl;
+            return;
+        }
+    }
+    outFile << "Since the DFS traversal visits all vertices (transposed or not), the graph is strongly connected" << endl;
 }
 
 
 void robustSoln::outputStronglyConnected(string fileName) {
-    if(theMap.getNumVertex() > 0) {
-        theMap.clear();
-    }
+    theMap.clear();
+    outFile << "------------------------" << endl;
     readGraphInputFile(fileName);
     outputStronglyConnected();
 }
