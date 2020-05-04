@@ -53,6 +53,10 @@ public:
     void makeIntoTree(vector<pair<T,T>>& head); //takes in the head and returns a tree
     void setOutFile(const char*);  //handles file input/output
     void setInFile(const char*);  //handles file input/output
+    vector<T> getVertecies();
+    vector<pair<T,T>> DFS(T start);
+    int getNumVertex();
+    void clear();
 };
 
 ////////////////////////////////////////////////////////////
@@ -442,6 +446,107 @@ void directedGraph<T>::printDFS(T start) {
         std::cout << " (" << a << " - " << b << ")" << endl;
 
     }
+}
+
+template <typename T>
+vector<pair<T,T>> directedGraph<T>::DFS(T start) {
+    ////variable declarations
+    //outFile << "dfs: " << endl;
+    vector<T> shortestPath;
+    vector<pair<T, int>> vertexValues; //list of vertecies value and what value they contain
+    vector<pair<T, T>> edges; //list of edges between things
+    int startOfGraph;
+    ///////////////////////////////////////////////////
+    //// PUSHES EVERY VERTEX INTO VERTEXVALUES, [0] = starting node (first)
+    //// PUSHED A VALUE OF  i = 0 (second)
+    ////////////////////////////////////////////////////
+    for(int u = 0; u < theGraph.size(); u++) {
+        pair<T, int> value;
+        list<T> temp = theGraph[u];
+        if(temp.front() == start) {
+            startOfGraph = u;
+            int b = startOfGraph;
+            for(b; b < theGraph.size(); b++) {
+                list<T> val = theGraph[b];
+                value.first = val.front();
+                value.second = 0;
+                vertexValues.push_back(value);
+            }
+            for(int s = 0; s < u; s++) {
+                list<T> val = theGraph[s];
+                value.first = val.front();
+                value.second = 0;
+                vertexValues.push_back(value);
+            }
+        }
+    }
+    int i = 1;
+    stack<T> priority; //used to "push." LIFO structure helps depth first
+    /////////////////////////////////////////////////
+    ////while there is a vertex such that num[v] = 0
+    ///////////////////////////////////////////////
+    for(int v = 0; v < vertexValues.size(); v++) {
+        if (vertexValues[v].second != 0) { continue; } //if value has already been assigned
+        vertexValues[v].second = i++;
+        priority.push(vertexValues[v].first); ////push the char
+        while (!priority.empty()) { ////While stack is not empty
+            //pop top element of the stack
+            T element = priority.top();
+            vector<T> adjElements;
+            //////////////////////////////////////////////
+            ////find list of vertecies adjacent to element
+            //////////////////////////////////////////////
+            for (int q = 0; q < theGraph.size(); q++) {
+                list <T> curr = theGraph[q];
+                if(curr.front() == element) {
+                    vector<T> myVector(curr.begin(), curr.end());
+                    myVector.erase(myVector.begin());
+                    //pushed adjacent elements into the vector
+                    adjElements = myVector;
+                    break;
+                }
+            }
+            /////////////////////////////////////////////////////////
+            ////for all vertecies adjacent to element push first 1 found
+            //////////////////////////////////////////////////////////
+            bool found = false;
+            for (int b = 0; b < adjElements.size(); b++) {
+                //find the adj elements
+                pair<T, int> currentAdjacentVertex;
+                int foundIndex = 0;
+                for (int c = 0; c < vertexValues.size(); c++) {
+                    if (adjElements[b] == vertexValues[c].first) {
+                        currentAdjacentVertex = vertexValues[c];
+                        foundIndex = c;
+                        //break;
+                        ///////////////////////////////////////
+                        ////increment the counter i and push to stack
+                        ///////////////////////////////////////
+                        if (currentAdjacentVertex.second == 0) { //if value is equal to zero
+                            found = true;
+                            vertexValues[foundIndex].second = i;
+                            i = i + 1;
+                            //code to push edge to edge list
+                            priority.push(currentAdjacentVertex.first); //enque the character
+                            pair<T, T> currentEdge;
+                            currentEdge.first = element;
+                            currentEdge.second = currentAdjacentVertex.first;
+                            edges.push_back(currentEdge);
+                        }
+                    }
+                    if(found){break;} //break a if found a new path (going deep first)
+                } //element is found
+                if(found) {break;} //break if a found a new path to (going deep first)
+            }
+            ///only pop if there is no more adjacent vertecies
+            if(!found) {
+                priority.pop();
+            }
+        } //end while loop
+        break; ////NEWWW
+    } //DEPTH FIRST SEARCH COMPLETED
+    ////RETURN ALL EDGES
+    return edges;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -1216,4 +1321,23 @@ void directedGraph<T>::setInFile(const char* fileName) { //output the input file
     }
 }
 
+template <typename T>
+vector<T> directedGraph<T>::getVertecies() {
+    vector<T> val;
+    for(int i = 0; i < theGraph.size(); i++) {
+        list<T> temp = theGraph[i];
+        val.push_back(temp.front());
+    }
+    return val;
+}
+
+template <typename T>
+int directedGraph<T>::getNumVertex() {
+    return numVertex;
+}
+
+template <typename T>
+void directedGraph<T>::clear() {
+    theGraph.clear();
+}
 #endif //INC_20S_3353_PA00_DIRECTEDGRAPH_H

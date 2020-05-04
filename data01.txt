@@ -1,3 +1,0 @@
-ow outputDFS.txt
-or g1.txt
-dfs B

@@ -11,8 +11,8 @@ set (EXE_NAME SampleProject)
 #   set (input02 "train_target.csv")
 # etc....
 
-set (input01 "data01.txt")
-set (input02 "g1.txt")
+set (input01 "g1.txt")
+set (input02 "g2.txt")
 
 #
 ##########################################

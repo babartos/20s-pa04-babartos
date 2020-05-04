@@ -4,6 +4,17 @@
 
 #include "trivialSoln.h"
 #include <string>
+#include <vector>
+#include <algorithm>
+
+trivialSoln::trivialSoln() {
+    this->CurrentFileName = "not intilized";
+    outFile.open("outputTrivial.txt");
+    outFile << "Trivial solution" << endl;
+}
+trivialSoln::~trivialSoln() {
+    outFile.close();
+}
 
 void trivialSoln::readGraphInputFile(string fileName) { //reads in a directed file
     this->CurrentFileName = fileName;
@@ -42,11 +53,53 @@ void trivialSoln::readGraphInputFile(string fileName) { //reads in a directed fi
 }
 
 void trivialSoln::outputStronglyConnected()  {
-    ofstream outFile;
-    outFile.open("outputTrivial.txt");
-    string start = "2";
-    cout << "DFS 0";
-    theMap.printDFS(start);
-    outFile << this->CurrentFileName;
-    outFile.close();
+    //variable declarations
+    vector<string> vertecies = theMap.getVertecies();
+    vector<int> numVertecies;
+    outFile << "graph \"" << this->CurrentFileName << "\":" << endl;
+    ////1) DFS from every vertex, v times
+    for (int i = 0; i < vertecies.size(); i++) {
+        outFile << "DFS @ " << vertecies[i] << ":" << endl;
+        vector<pair<string, string>> edges = theMap.DFS(vertecies[i]);
+        vector<string> reachableVertecies;
+        for (int i = 0; i < edges.size(); i++) {
+            outFile << " " << edges[i].first << " - " << edges[i].second << endl;
+            //push back the found verteices into a "visited vertecies list"
+            string key = edges[i].first;
+            if (std::find(reachableVertecies.begin(), reachableVertecies.end(), key) == reachableVertecies.end()) {
+                reachableVertecies.push_back(key);
+            }
+            key = edges[i].second;
+            if (std::find(reachableVertecies.begin(), reachableVertecies.end(), key) == reachableVertecies.end()) {
+                reachableVertecies.push_back(key);
+            }
+        }
+        numVertecies.push_back(reachableVertecies.size());
+    }
+    //// 2) If any DFS doesn’t visit all vertices, then graph is not strongly connected
+    int vertexNum = theMap.getNumVertex();
+    bool isStronglyConnected = true;
+    for(int i = 0; i < numVertecies.size(); i++) {
+        //numVertecies is reachable vertecies
+        //therefor if less than graph's numVertecies, the graph is not strongly connected
+        if (numVertecies[i] < vertexNum) {
+            isStronglyConnected = false;
+            break;
+        }
+    }
+    if(isStronglyConnected) {
+        outFile << "Since every vertex can be reached from every other vertex: the graph is strongly connected" << endl;
+    }
+    else {
+        outFile << "Since every vertex cannot be reached from every other vertex: the graph is not strongly connected" << endl;
+    }
+}
+////source: https://www.geeksforgeeks.org/connectivity-in-a-directed-graph/?ref=rp
+
+void trivialSoln::outputStronglyConnected(string fileName) {
+    if(theMap.getNumVertex() > 0) {
+        theMap.clear();
+    }
+    readGraphInputFile(fileName);
+    outputStronglyConnected();
 }

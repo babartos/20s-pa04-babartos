@@ -12,13 +12,15 @@ using namespace std;
 
 class trivialSoln {
 public:
-    //trivialSoln();
+    trivialSoln();
+    ~trivialSoln();
     void readGraphInputFile(string fileName); //reads in a directedGraph file
     void outputStronglyConnected();
+    void outputStronglyConnected(string fileName);
 private:
     directedGraph<string> theMap;
     string CurrentFileName;
-
+    ofstream outFile;
 };
 
 
