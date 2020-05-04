@@ -57,6 +57,7 @@ public:
     vector<pair<T,T>> DFS(T start);
     int getNumVertex();
     void clear();
+    void transpose();
 };
 
 ////////////////////////////////////////////////////////////
@@ -1340,4 +1341,28 @@ template <typename T>
 void directedGraph<T>::clear() {
     theGraph.clear();
 }
+
+template <typename T>
+void directedGraph<T>::transpose() {
+    //transpose graph
+    vector<T> val = vertexList;
+    vector<list<T>> temp = theGraph;
+    theGraph.clear();
+    for(int i = 0; i < val.size(); i++) {
+        addVertex(val[i]);
+    }
+
+    for(int i = 0; i < temp.size(); i++) {
+        list<T> curr = temp[i];
+        T headFront = curr.front();
+        pair<T,T> currEdge;
+        vector<T> currEdgesList = listToVector(curr);
+        for (int j = 1; j < currEdgesList.size(); j++) {
+            currEdge.first = currEdgesList[j];
+            currEdge.second = headFront;
+            this->addEdge(currEdge.first, currEdge.second);
+        }
+    }
+}
+
 #endif //INC_20S_3353_PA00_DIRECTEDGRAPH_H
