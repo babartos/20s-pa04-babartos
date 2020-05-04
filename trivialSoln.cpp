@@ -11,6 +11,7 @@ trivialSoln::trivialSoln() {
     this->CurrentFileName = "not intilized";
     outFile.open("outputTrivial.txt");
     outFile << "Trivial solution" << endl;
+    start = std::chrono::system_clock::now();
 }
 trivialSoln::~trivialSoln() {
     outFile.close();
@@ -102,4 +103,11 @@ void trivialSoln::outputStronglyConnected(string fileName) {
     readGraphInputFile(fileName);
     outFile << "------------------------" << endl;
     outputStronglyConnected();
+}
+
+void trivialSoln::collectTimingData() {
+    end = std::chrono::system_clock::now();
+    std::chrono::duration<double> elapsed_seconds_A = end - start;
+    double lengthA = elapsed_seconds_A.count();
+    outFile << "elapsed time: " << lengthA << endl;
 }

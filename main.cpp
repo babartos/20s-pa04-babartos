@@ -17,10 +17,12 @@ int main(int argc, char* argv[]) {
     trivialSoln firstSolution;
     firstSolution.outputStronglyConnected(fileName1);
     firstSolution.outputStronglyConnected(fileName2);
+    firstSolution.collectTimingData();
     ////2) Non-Trivial solution using Kosajru's algorithm
     robustSoln secondSolution;
     secondSolution.outputStronglyConnected(fileName1);
     secondSolution.outputStronglyConnected(fileName2);
+    secondSolution.collectTimingData();
     cout << "helloworld" << endl;
     return 0;
 }

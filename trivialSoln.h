@@ -7,6 +7,8 @@
 
 #include <iostream>
 #include <string>
+#include <chrono>
+#include <ctime>
 #include "directedGraph.h"
 using namespace std;
 
@@ -17,10 +19,12 @@ public:
     void readGraphInputFile(string fileName); //reads in a directedGraph file
     void outputStronglyConnected();
     void outputStronglyConnected(string fileName);
+    void collectTimingData();
 private:
     directedGraph<string> theMap;
     string CurrentFileName;
     ofstream outFile;
+    std::chrono::time_point<std::chrono::system_clock> start, end; //varaible declaration
 };
 
 

@@ -125,3 +125,10 @@ void robustSoln::outputStronglyConnected(string fileName) {
     readGraphInputFile(fileName);
     outputStronglyConnected();
 }
+
+void robustSoln::collectTimingData() {
+    end = std::chrono::system_clock::now();
+    std::chrono::duration<double> elapsed_seconds_A = end - start;
+    double lengthA = elapsed_seconds_A.count();
+    outFile << "elapsed time: " << lengthA << endl;
+}
