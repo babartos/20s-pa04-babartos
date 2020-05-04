@@ -1,5 +1,7 @@
-# Programming Assignment 03 - Kruskal's MST Algorithm
+# Programming Assignment 04
 
-- Project handout can be found [here](https://www.dropbox.com/s/7v5c73s37mt26i2/pa03-KruskalsImplementation.pdf?dl=0). 
-- In this repo, you need to add in appropriate Github Workflows to manage the build of your project. 
-- Your project should be implemented in CLion so that the it can be easily opened in the IDE. 
+-Problem: check if a directed graph is strongly connected
+-A graph is strongly connected if there is a path between every two pairs of verticies
+
+-Trivial solution using a DFS from every vertex V
+-Robust solution using Kosajru's algorithm
