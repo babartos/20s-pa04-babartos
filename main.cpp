@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
     firstSolution.outputStronglyConnected(fileName1);
     firstSolution.outputStronglyConnected(fileName2);
     ////2) Non-Trivial solution using Kosajru's algorithm
-    
+
     cout << "helloworld" << endl;
     return 0;
 }
