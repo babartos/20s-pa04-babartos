@@ -9,8 +9,8 @@
 
 robustSoln::robustSoln() {
     this->CurrentFileName = "not intilized";
-    outFile.open("outputTrivial.txt");
-    outFile << "Trivial solution" << endl;
+    outFile.open("outputRobust.txt");
+    outFile << "Robust solution" << endl;
 }
 
 robustSoln::~robustSoln() {
@@ -55,7 +55,15 @@ void robustSoln::readGraphInputFile(string fileName) { //reads in a directedGrap
 
 void robustSoln::outputStronglyConnected() {
     ////1) Initialize all vertices as not visited.
-
+    vector<string> vertexList = theMap.getVertecies();
+    vector<pair<string, bool>> visited; //bool value = 0 if not visited; bool value = 1 if visited
+    if(vertexList.size() == 0) {cout << "error in making the map" << endl;}
+    for(int i = 0; i < vertexList.size(); i++) {
+        pair<string, bool> toPush;
+        toPush.first = vertexList[i];
+        toPush.second = false;
+        visited.push_back(toPush);
+    }
     ////2) Do a DFS traversal of graph starting from any arbitrary vertex v. If DFS traversal doesn’t visit all vertices, then return false.
 
     ////3) Reverse the graph
